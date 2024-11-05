@@ -1,3 +1,5 @@
+Create and share your recipies with rest of the world.
+
 # API
 
 Install json server
