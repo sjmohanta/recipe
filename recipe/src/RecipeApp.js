@@ -30,7 +30,7 @@ export default function RecipeApp() {
                 </div>
             </div>
         </nav>
-        <LatestRecepies></LatestRecepies>
+        <LatestRecepies message="Please wait a while recipeies are being loaded."></LatestRecepies>
     </div>
   );
 }

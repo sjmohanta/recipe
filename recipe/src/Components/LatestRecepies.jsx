@@ -1,4 +1,4 @@
-import Constants from "../Constants";
+import AppConfig from "../AppConfig";
 import { useState, useEffect } from "react";
 import  RecipeCard from "./RecipeCard"; 
 
@@ -11,7 +11,8 @@ export default function LatestRecepies({message})
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/recipes`)
+        const apiRootUrl = AppConfig("ApiRootPath");
+        fetch(`${apiRootUrl}recipes`)
         .then(function (response) {        
             if(response.ok){
                 response.json().then(function (result) {
@@ -19,26 +20,26 @@ export default function LatestRecepies({message})
                     latestRecepieData.status = 200;
                     latestRecepieData.recepies = latestRecipeList;
                     setLatestRecepis(latestRecepieData);
-            });    
-        }
-        else 
-        {
-            latestRecepieData.status = 500;
-            latestRecepieData.recepies = [];
-            setLatestRecepis(latestRecepieData);
-        }
-    });
-      }, []);
+                });    
+            }
+            else 
+            {
+                latestRecepieData.status = 500;
+                latestRecepieData.recepies = [];
+                setLatestRecepis(latestRecepieData);
+            }
+        });
+    }, []);
 
     var recipeCards = latestRecepieData.recepies.map(function (recipe) {
-        debugger;
         return <RecipeCard {...recipe}></RecipeCard>;
     });
 
     return <div>
         <h2 className="text-info">Latest Recepies</h2>
+        <hr></hr>
         <div className="row">
-            {latestRecepieData.status == 0 && <p>Please wait a while recipeies are being loaded.</p>}
+            {latestRecepieData.status == 0 && <p>{latestRecepieData.message}</p>}
             {latestRecepieData.status == 200 && !latestRecepieData.recepies.length && <p className="text-warning">
             No receipies were found. Be the first to add a recipe</p>}
             {latestRecepieData.status == 200 && latestRecepieData.recepies.length && recipeCards}
