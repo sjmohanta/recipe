@@ -15,18 +15,21 @@ export default function LatestRecepies({message})
         fetch(`${apiRootUrl}recipes`)
         .then(function (response) {        
             if(response.ok){
-                response.json().then(function (result) {
-                    var latestRecipeList = result;
-                    latestRecepieData.status = 200;
-                    latestRecepieData.recepies = latestRecipeList;
-                    setLatestRecepis(latestRecepieData);
+                response.json().then(function (result) {                    
+                    setLatestRecepis({
+                        status: 200,
+                        recepies: result,
+                        message: null
+                    });
                 });    
             }
             else 
-            {
-                latestRecepieData.status = 500;
-                latestRecepieData.recepies = [];
-                setLatestRecepis(latestRecepieData);
+            {                
+                setLatestRecepis({
+                    status: 500,
+                    recepies: [],
+                    message: null
+                });
             }
         });
     }, []);
