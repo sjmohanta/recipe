@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.css';
-import LatestRecepies from "./Components/LatestRecepies";
+import TopRecipies from "./Components/TopRecipies";
 
 export default function RecipeApp() {
   return (
@@ -30,7 +30,7 @@ export default function RecipeApp() {
                 </div>
             </div>
         </nav>
-        <LatestRecepies message="Please wait a while recipeies are being loaded."></LatestRecepies>
+        <TopRecipies message="Please wait a while recipeies are being loaded."></TopRecipies>
     </div>
   );
 }
