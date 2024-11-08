@@ -1,6 +1,6 @@
-function RecipeCard({name, image, cuisine, prepTimeMinutes})
+function RecipeCard({id, name, image, cuisine, prepTimeMinutes})
 {
-    return <div className="col-md-4 col-sm-6">
+    return <div key={id} className="col-md-4 col-sm-6">
                 <div className="card">
                     <h5 className="card-header text-primary">
                         {name}
