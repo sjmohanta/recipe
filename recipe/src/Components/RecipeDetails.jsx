@@ -70,6 +70,8 @@ export default function RecipeDetails()
 
     function Recipe({id, name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
     {
+        document.title = `${name} Recipe`;
+
         return <>
             <h1 className="text-primary">{name}</h1>
             <hr/>
