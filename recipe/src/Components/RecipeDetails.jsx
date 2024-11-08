@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AppConfig from "../AppConfig";
+import TopNav from "./TopNav";
 
 export default function RecipeDetails()
 {
@@ -128,6 +129,7 @@ export default function RecipeDetails()
     }
 
     return <div>
+        <TopNav></TopNav>
         {recepieDetails.status === 0 && <RecipeDetailsLoading />}
         {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
         {recepieDetails.status === 404 && <RecipeNotFound />}

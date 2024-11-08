@@ -1,24 +1,21 @@
 import { Link } from "react-router-dom";
 
-function RecipeCard({id, name, image, cuisine, prepTimeMinutes})
+function RecipeCard({id, name, image, cuisine, rating, reviewCount})
 {
     return <div key={id} className="col-md-4 col-sm-6">
                 <div className="card">
                     <h5 className="card-header text-primary">
                         <Link to={`/Recipe/${id}`}>
                             {name}
-                        </Link>                        
+                        </Link>
                     </h5>
                     <img className="card-img-top" src={image} alt="Cover image"></img>                    
                     <div className="card-body">
-                        
                     </div>
-                <div className="card-footer">
-                <span className="badge text-bg-success">{cuisine}</span>
-                <span className="float-end d-inline-block">{prepTimeMinutes} min</span>
-                         
+                    <div className="card-footer">
+                        <span className="badge text-bg-warning">{rating} / 5</span> ({reviewCount} votes)
+                    </div>
                 </div>
-            </div>
         </div>;
 }
 
