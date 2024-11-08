@@ -14,26 +14,27 @@ export default function RecipeDetails()
     });
 
     useEffect(() => {
-        const apiRootUrl = AppConfig("ApiRootPath");
-        fetch(`${apiRootUrl}recipes/${id}`)
-        .then(function (response) {        
-            if(response.ok){
-                response.json().then(function (result) {                    
-                    setRecepieDetails({
-                        ...recepieDetails,
-                        status: 200,
-                        recepeDetails: result
-                    });
-                });    
-            }
-            else 
-            {                
+        async function GetRecipeDetail(recipeId) {
+            const apiRootUrl = AppConfig("ApiRootPath");
+            var response = await fetch(`${apiRootUrl}recipes/${recipeId}`);
+            if (!response.ok)
+            {
                 setRecepieDetails({
                     ...recepieDetails,
                     status: 500
                 });
             }
-        });
+            else{
+                var result = await response.json();
+                setRecepieDetails({
+                    ...recepieDetails,
+                    status: 200,
+                    recepeDetails: result
+                });
+            }            
+        }
+
+        GetRecipeDetail(id);        
     }, []);
 
     return <p>
