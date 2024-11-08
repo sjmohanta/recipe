@@ -20,14 +20,14 @@ export default function RecipeDetails()
             {
                 setRecepieDetails({
                     ...recepieDetails,
-                    status: 500
+                    status: response.status
                 });
             }
             else{
                 var result = await response.json();
                 setRecepieDetails({
                     ...recepieDetails,
-                    status: 200,
+                    status: response.status,
                     info: result
                 });
             }            
@@ -44,31 +44,25 @@ export default function RecipeDetails()
         </p>
     }
 
-    function ShowRecipe({info})
+    function RecipeNotFound()
     {
-        if (!info)
-        {
-            return <div>
-                <h4 className="text-warning">
-                    Requested recipe not found.
-                </h4>
-                <p>
-                    Opps! We don't have the requested recipe.<br />
-                    Please follow below link to find available recipes and find awesome recipes.
-                </p>
-                <div>
-                    <Link className="btn btn-info" to="/RecipeList">
-                        Recipe List
-                    </Link>
-                </div>
+        return <div>
+            <h4 className="text-warning">
+                Requested recipe not found.
+            </h4>
+            <p>
+                Opps! We don't have the requested recipe.<br />
+                Please follow below link to find available recipes and find awesome recipes.
+            </p>
+            <div>
+                <Link className="btn btn-info" to="/RecipeList">
+                    Recipe List
+                </Link>
             </div>
-        }
-        else{
-            return <Recipe {...info}></Recipe>;
-        }
-    }
+        </div>;
+    }    
 
-    function Recipe({id, name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
+    function ShowRecipe({id, name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
     {
         document.title = `${name} Recipe`;
 
@@ -106,6 +100,7 @@ export default function RecipeDetails()
 
     return <div>
         {recepieDetails.status === 0 && <RecipeDetailsLoading />}
-        {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails} />}
+        {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
+        {recepieDetails.status === 404 && <RecipeNotFound />}
     </div>
 }
