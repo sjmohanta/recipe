@@ -15,22 +15,33 @@ export default function RecipeDetails()
     useEffect(() => {
         async function getRecipeDetail(recipeId) {
             const apiRootUrl = AppConfig("ApiRootPath");
-            var response = await fetch(`${apiRootUrl}recipes/${recipeId}`);
-            if (!response.ok)
+
+            try
+            {
+                var response = await fetch(`${apiRootUrl}recipes/${recipeId}`);
+                if (!response.ok)
+                {
+                    setRecepieDetails({
+                        ...recepieDetails,
+                        status: response.status
+                    });
+                }
+                else{
+                    var result = await response.json();
+                    setRecepieDetails({
+                        ...recepieDetails,
+                        status: response.status,
+                        info: result
+                    });
+                } 
+            }
+            catch
             {
                 setRecepieDetails({
                     ...recepieDetails,
-                    status: response.status
+                    status: 500
                 });
-            }
-            else{
-                var result = await response.json();
-                setRecepieDetails({
-                    ...recepieDetails,
-                    status: response.status,
-                    info: result
-                });
-            }            
+            }                       
         }
 
         getRecipeDetail(id);        
@@ -42,6 +53,24 @@ export default function RecipeDetails()
             Please wait...
             An awesome recipe is loading.
         </p>
+    }
+
+    function ServerError()
+    {
+        return <div>
+            <h4 className="text-danger">
+                Unknown server error 
+            </h4>
+            <p>
+                Looks like there is a server error.<br />
+                Please let us know if the error persists.
+            </p>
+            <div>
+                <Link className="btn btn-info" to="/Contact">
+                    Contact Us
+                </Link>
+            </div>
+        </div>;
     }
 
     function RecipeNotFound()
@@ -102,5 +131,6 @@ export default function RecipeDetails()
         {recepieDetails.status === 0 && <RecipeDetailsLoading />}
         {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
         {recepieDetails.status === 404 && <RecipeNotFound />}
+        {recepieDetails.status === 500 && <ServerError />}
     </div>
 }
