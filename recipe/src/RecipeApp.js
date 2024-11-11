@@ -4,6 +4,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.css';
 import RecipeDetails from './Components/RecipeDetails';
 import Home from './Components/Home';
+import Login from './Components/Auth/Login';
+import Register from './Components/Auth/Register';
 
 export default function RecipeApp() {
   return (
@@ -11,6 +13,8 @@ export default function RecipeApp() {
         <BrowserRouter>
             <Routes>
             <Route path='/' element={<Home/>} />
+            <Route path='/Login' element={<Login/>} />
+            <Route path='/Register' element={<Register/>} />
             <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
         </Routes>
         </BrowserRouter>         

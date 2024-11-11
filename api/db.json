@@ -27,9 +27,10 @@
   ],
   "Users": [
     {
-      "UserName": "",
-      "Password": "",
-      "Name": ""
+		"id": 1,
+		"UserName": "test@test.com",
+		"Password": "",
+		"Name": "Test"
     }
   ]
 }
