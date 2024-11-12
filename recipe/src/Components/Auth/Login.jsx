@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import TopNav from "../TopNav";
-import { Link } from "react-router-dom";
 import appConfig from "../../Utility/AppConfig";
+import { Link, redirect } from "react-router-dom";
+import {saveAuthToken} from "../../Utility/AuthUtility";
 
 export default function Login()
 {
@@ -22,16 +23,29 @@ export default function Login()
         debugger;
         var authData = {email: refEmailId.current.value, password: refPassword.current.value};
 
-        var authApiUrl = AppConfig('AuthApiUrl')
+        var authApiUrl = appConfig('AuthApiUrl');
 
-        fetch(`${authApiUrl}/login`, {
-            method: 'POST',
-            mode: "cors",
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(authData)
-        })
-        .then(res => res.json())
-        .then(data => console.log(data.user))
+        async function submitAuth()
+        {
+            const response = await fetch(`${authApiUrl}/login`, {
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(authData)
+            });
+
+            if (!response.ok)
+            {
+                // handle error
+                return;
+            }
+
+            var result = await response.json();
+            saveAuthToken(result);
+
+            return redirect('/');
+        }
+
+        submitAuth();
     }
 
     return <>

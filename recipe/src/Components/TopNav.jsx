@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
+import { getAuthInfo } from "../Utility/AuthUtility"; 
 
 export default function TopNav()
 {
+    function AuthNav()
+    {
+        const authInfo = getAuthInfo();
+        return <ul className="nav justify-content-end">
+                    {authInfo && <li className="nav-item">
+                        <Link className="nav-link">Hello, {authInfo.name}</Link>
+                    </li>}
+                    {authInfo && <li className="nav-item">
+                        <Link className="nav-link" to="/Logout">Logout</Link>
+                    </li>}
+                    {!authInfo && <li className="nav-item">
+                        <Link className="nav-link" to="/Login">Login</Link>
+                    </li>}
+                </ul>;
+    }
+
     return <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
         <Link className="navbar-brand" to="/">Recipe Book</Link>
@@ -17,9 +34,7 @@ export default function TopNav()
                     <Link className="nav-link" to="/Recipe/Add">Add</Link>
                 </li>                
             </ul>
-            <span className="navbar-text">
-                <Link className="nav-link" to="/Login">Login</Link>
-            </span>
+            <AuthNav></AuthNav>
         </div>
     </div>
 </nav>;
