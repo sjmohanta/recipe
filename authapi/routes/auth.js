@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
   }
 
   const token = createJSONToken(email);
-  res.json({ token: token, uid: user.id });
+  res.json({ token: token, uid: user.id, name: user.name });
 });
 
 module.exports = router;
