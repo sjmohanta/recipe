@@ -1,4 +1,4 @@
-import AppConfig from "../AppConfig";
+import appConfig from "../Utility/AppConfig";
 import { useState, useEffect } from "react";
 import  RecipeCard from "./RecipeCard"; 
 

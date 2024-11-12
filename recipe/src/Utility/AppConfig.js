@@ -1,4 +1,4 @@
-export default function AppConfig(key)
+export default function appConfig(key)
 {
     const configuration = {
         ApiRootPath: 'http://localhost:3000',

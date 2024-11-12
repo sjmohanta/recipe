@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import TopNav from "../TopNav";
-import AppConfig from "../../AppConfig";
 import { Link } from "react-router-dom";
+import appConfig from "../../Utility/AppConfig";
 
 export default function Register()
 {

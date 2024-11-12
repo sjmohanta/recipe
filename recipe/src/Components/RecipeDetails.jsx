@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AppConfig from "../AppConfig";
+import appConfig from "../Utility/AppConfig";
 import TopNav from "./TopNav";
 
 export default function RecipeDetails()
