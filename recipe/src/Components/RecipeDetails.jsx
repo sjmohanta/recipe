@@ -15,7 +15,7 @@ export default function RecipeDetails()
 
     useEffect(() => {
         async function getRecipeDetail(recipeId) {
-            const apiRootUrl = AppConfig("ApiRootPath");
+            const apiRootUrl = appConfig("ApiRootPath");
 
             try
             {

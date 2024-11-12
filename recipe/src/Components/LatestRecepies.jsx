@@ -11,7 +11,7 @@ export default function LatestRecepies({message})
     });
 
     useEffect(() => {
-        const apiRootUrl = AppConfig("ApiRootPath");
+        const apiRootUrl = appConfig("ApiRootPath");
         fetch(`${apiRootUrl}/recipes`)
         .then(function (response) {        
             if(response.ok){
