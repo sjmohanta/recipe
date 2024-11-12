@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import TopNav from "../TopNav";
+import AppConfig from "../../AppConfig";
+import { Link } from "react-router-dom";
 
 export default function Login()
 {
@@ -18,9 +20,18 @@ export default function Login()
     function validateForm()
     {
         debugger;
-        var emailId = refEmailId.current.value;
-        var password = refPassword.current.value;
+        var authData = {email: refEmailId.current.value, password: refPassword.current.value};
 
+        var authApiUrl = AppConfig('AuthApiUrl')
+
+        fetch(`${authApiUrl}/login`, {
+            method: 'POST',
+            mode: "cors",
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(authData)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data.user))
     }
 
     return <>
@@ -36,5 +47,9 @@ export default function Login()
                 </div>
                 <button type="button" class="btn btn-primary" onClick={validateForm}>Login</button>
         </form>
+        <p>
+            Don't have an account. Sign up Today.<br />
+            <Link className="btn btn-secondary" to="/Register">Sign Up</Link>
+        </p>
     </>;
 }

@@ -19,7 +19,7 @@ export default function RecipeDetails()
 
             try
             {
-                var response = await fetch(`${apiRootUrl}recipes/${recipeId}`);
+                var response = await fetch(`${apiRootUrl}/recipes/${recipeId}`);
                 if (!response.ok)
                 {
                     setRecepieDetails({

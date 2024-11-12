@@ -12,7 +12,7 @@ export default function LatestRecepies({message})
 
     useEffect(() => {
         const apiRootUrl = AppConfig("ApiRootPath");
-        fetch(`${apiRootUrl}recipes`)
+        fetch(`${apiRootUrl}/recipes`)
         .then(function (response) {        
             if(response.ok){
                 response.json().then(function (result) {                    

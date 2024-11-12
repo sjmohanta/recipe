@@ -7,7 +7,7 @@ export default function TopRecipies({ message }) {
 
   useEffect(() => {
     const apiRootUrl = AppConfig("ApiRootPath");
-    fetch(`${apiRootUrl}recipes`).then(async (response) => {
+    fetch(`${apiRootUrl}/recipes`).then(async (response) => {
       if (response.ok) {
         const result = await response.json();
         setLatestRecepis(result);
