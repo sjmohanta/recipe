@@ -1,2 +1,2 @@
-/recipe/.vs/
-/node_modules/
+/api/node_modules/
+/authapi/node_modules/
