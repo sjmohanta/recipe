@@ -51,15 +51,15 @@ export default function Login()
     return <>
             <TopNav></TopNav>
             <form>
-                <div class="mb-3">
-                    <label for="txtEmailId" class="form-label">Email</label>
-                    <input ref={refEmailId} type="email" class="form-control" id="txtEmailId" required />
+                <div className="mb-3">
+                    <label for="txtEmailId" className="form-label">Email</label>
+                    <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
                 </div>
                 <div class="mb-3">
-                    <label for="txtPassword" class="form-label" required>Password</label>
-                    <input ref={refPassword} type="password" class="form-control" id="txtPassword" />
+                    <label for="txtPassword" className="form-label" required>Password</label>
+                    <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
                 </div>
-                <button type="button" class="btn btn-primary" onClick={validateForm}>Login</button>
+                <button type="button" className="btn btn-primary" onClick={validateForm}>Login</button>
         </form>
         <p>
             Don't have an account. Sign up Today.<br />

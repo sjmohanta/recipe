@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import TopNav from "./TopNav";
 import appConfig from "../Utility/AppConfig";
 import { getAuthInfo } from "../Utility/AuthUtility";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 export default function CreateRecipe()
 {
@@ -35,7 +35,7 @@ export default function CreateRecipe()
         // To-do : Validate
         debugger;
         const apiRootUrl = appConfig("ApiRootPath");
-        const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe, userId: authInfo.id};
+        const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe, userId: authInfo.uid};
 
         dataToPost.integrands = dataToPost.integrands.filter(inte => inte && inte.length);
         dataToPost.instructions = dataToPost.instructions.filter(inst => inst && inst.length);
@@ -49,6 +49,7 @@ export default function CreateRecipe()
             if(response.ok){
                 response.json().then(function (result) {                    
                     debugger;
+                    redirect(`/Recipe/${result.id}`);
                 });
             }
             else
@@ -110,29 +111,29 @@ export default function CreateRecipe()
             Create Recipe
         </h1>
         <form className="col-8">
-            <div class="mb-3">
-                <label for="txtRecipeName" class="form-label">Name</label>
-                <input class="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
+            <div className="mb-3">
+                <label htmlFor="txtRecipeName" className="form-label">Name</label>
+                <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
             </div>            
-            <div class="mb-3">
-                <label class="form-label">Integrends</label>
-                <span class="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
-                <span class="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfIntegrands}>-</span>
+            <div className="mb-3">
+                <label className="form-label">Integrends</label>
+                <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
+                <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfIntegrands}>-</span>
                 {
-                    [...Array(recipe.noOfintegrands).keys()].map(key => <input onChange={(e) => integrandChanged(e, key)} id={`txtIntegrend${key + 1}`} className="form-control mb-1" 
+                    [...Array(recipe.noOfintegrands).keys()].map(key => <input onChange={(e) => integrandChanged(e, key)} key={`txtIntegrend${key + 1}`} className="form-control mb-1" 
                         placeholder={`Integrend ${key + 1}`} required />)
                 }
             </div>
-            <div class="mb-3">
-                <label class="form-label" required>Instructions</label>
-                <span class="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfSteps}>+</span>
-                <span class="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfSteps}>-</span>
+            <div className="mb-3">
+                <label className="form-label" required>Instructions</label>
+                <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfSteps}>+</span>
+                <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfSteps}>-</span>
                 {
-                    [...Array(recipe.noOfInstructions).keys()].map(key => <input onChange={(e) => instructionChanged(e, key)} id={`txtStep${key + 1}`} className="form-control mb-1" 
+                    [...Array(recipe.noOfInstructions).keys()].map(key => <input onChange={(e) => instructionChanged(e, key)} key={`txtStep${key + 1}`} className="form-control mb-1" 
                         placeholder={`Instruction ${key + 1}`} required />)
                 }
             </div>
-            <button type="button" class="btn btn-primary" onClick={validateForm}>Create</button>
+            <button type="button" className="btn btn-primary" onClick={validateForm}>Create</button>
         </form>
     </>;
 

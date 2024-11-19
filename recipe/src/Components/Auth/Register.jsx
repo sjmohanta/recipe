@@ -56,19 +56,19 @@ export default function Register()
     return <>
             <TopNav></TopNav>
             <form>
-            <div class="mb-3">
-                    <label for="txtName" class="form-label">Name</label>
-                    <input ref={refName} class="form-control" id="txtName" required />
+            <div className="mb-3">
+                    <label for="txtName" className="form-label">Name</label>
+                    <input ref={refName} className="form-control" id="txtName" required />
                 </div>
                 <div class="mb-3">
-                    <label for="txtEmailId" class="form-label">Email</label>
-                    <input ref={refEmailId} type="email" class="form-control" id="txtEmailId" required />
+                    <label for="txtEmailId" className="form-label">Email</label>
+                    <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
                 </div>
                 <div class="mb-3">
-                    <label for="txtPassword" class="form-label" required>Password</label>
-                    <input ref={refPassword} type="password" class="form-control" id="txtPassword" />
+                    <label for="txtPassword" className="form-label" required>Password</label>
+                    <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
                 </div>
-                <button type="button" class="btn btn-primary" onClick={validateForm}>Register</button>
+                <button type="button" className="btn btn-primary" onClick={validateForm}>Register</button>
         </form>
         <p>
             Already have an account.<br />
