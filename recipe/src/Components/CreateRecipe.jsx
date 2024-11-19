@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import TopNav from "./TopNav";
 import appConfig from "../Utility/AppConfig";
+import { getAuthInfo } from "../Utility/AuthUtility";
+import { Link } from "react-router-dom";
 
 export default function CreateRecipe()
 {
@@ -12,12 +14,31 @@ export default function CreateRecipe()
         instructions: []
     });
 
+    var authInfo = getAuthInfo();
+
+    if (!authInfo)
+    {
+        return <>
+        <TopNav></TopNav>
+        <h4 className="text-danger">Unauthorized Request</h4>
+        <p>
+            You are not authorized to view this page, please login to proceed.<br/><br/>
+            <Link to="/login" className="btn btn-primary">
+                Login
+            </Link>
+        </p>
+        </>;
+    }    
+
     function validateForm()
     {
         // To-do : Validate
         debugger;
         const apiRootUrl = appConfig("ApiRootPath");
-        const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe};
+        const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe, userId: authInfo.id};
+
+        dataToPost.integrands = dataToPost.integrands.filter(inte => inte && inte.length);
+        dataToPost.instructions = dataToPost.instructions.filter(inst => inst && inst.length);
 
         fetch(`${apiRootUrl}/recipes`, {
             method: 'POST',
