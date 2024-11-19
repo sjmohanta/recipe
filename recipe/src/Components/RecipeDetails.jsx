@@ -92,7 +92,7 @@ export default function RecipeDetails()
         </div>;
     }    
 
-    function ShowRecipe({id, name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
+    function ShowRecipe({id, name, integrands, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
     {
         document.title = `${name} Recipe`;
 
@@ -103,7 +103,7 @@ export default function RecipeDetails()
                 Integrends
             </h4>
             <ul>
-                {ingredients.map((ingredient) => {
+                {integrands.map((ingredient) => {
                     return <li>{ingredient}</li>
                 })}
             </ul>

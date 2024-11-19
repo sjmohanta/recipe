@@ -1,19 +1,40 @@
 import { useRef, useState } from "react";
 import TopNav from "./TopNav";
+import appConfig from "../Utility/AppConfig";
 
 export default function CreateRecipe()
 {
     const [recipe, updateRecipeState] = useState({
         name: undefined,
         noOfintegrands: 4,
-        integrends: [],
+        integrands: [],
         noOfInstructions: 6,
         instructions: []
     });
 
     function validateForm()
     {
+        // To-do : Validate
+        debugger;
+        const apiRootUrl = appConfig("ApiRootPath");
+        const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe};
 
+        fetch(`${apiRootUrl}/recipes`, {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({...dataToPost})
+        })
+        .then(function (response) {        
+            if(response.ok){
+                response.json().then(function (result) {                    
+                    debugger;
+                });
+            }
+            else
+            {
+                debugger;
+            }
+        });
     }
 
     function increaseNoOfIntegrands()
@@ -52,8 +73,8 @@ export default function CreateRecipe()
 
     function integrandChanged(e, position)
     {
-        recipe.integrends[position] = e.target.value;
-        updateRecipeState({...recipe, integrends: recipe.integrends});
+        recipe.integrands[position] = e.target.value;
+        updateRecipeState({...recipe, integrands: recipe.integrands});
     }
 
     function instructionChanged(e, position)
