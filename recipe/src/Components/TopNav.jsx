@@ -31,7 +31,7 @@ export default function TopNav()
                     <Link className="nav-link active" aria-current="page" to="/Recipes">Recipies</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/Recipe/Add">Add</Link>
+                    <Link className="nav-link" to="/Recipe/Create">Add</Link>
                 </li>                
             </ul>
             <AuthNav></AuthNav>

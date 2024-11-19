@@ -6,6 +6,7 @@ import RecipeDetails from './Components/RecipeDetails';
 import Home from './Components/Home';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
+import CreateRecipe from './Components/CreateRecipe';
 
 export default function RecipeApp() {
   return (
@@ -15,6 +16,7 @@ export default function RecipeApp() {
             <Route path='/' element={<Home/>} />
             <Route path='/Login' element={<Login/>} />
             <Route path='/Register' element={<Register/>} />
+            <Route path='/Recipe/Create' element={<CreateRecipe/>} /> 
             <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
         </Routes>
         </BrowserRouter>         
