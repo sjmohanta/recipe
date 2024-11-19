@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import TopNav from "./TopNav";
 import appConfig from "../Utility/AppConfig";
 import { getAuthInfo } from "../Utility/AuthUtility";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateRecipe()
 {
+    const navigate = useNavigate();
+
     const [recipe, updateRecipeState] = useState({
         name: undefined,
         noOfintegrands: 4,
@@ -15,7 +17,6 @@ export default function CreateRecipe()
     });
 
     var authInfo = getAuthInfo();
-
     if (!authInfo)
     {
         return <>
@@ -45,11 +46,12 @@ export default function CreateRecipe()
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({...dataToPost})
         })
-        .then(function (response) {        
+        .then(function (response) {      
+            
             if(response.ok){
                 response.json().then(function (result) {                    
                     debugger;
-                    redirect(`/Recipe/${result.id}`);
+                    navigate(`/Recipe/${result.id}`);
                 });
             }
             else

@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import TopNav from "../TopNav";
 import appConfig from "../../Utility/AppConfig";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {saveAuthToken} from "../../Utility/AuthUtility";
 
 export default function Login()
 {
+    const navigate = useNavigate();
     const [formState, updateFormState] = useState({
         isFormSubmitted: false,
         message: undefined,
@@ -42,7 +43,7 @@ export default function Login()
             var result = await response.json();
             saveAuthToken(result);
 
-            return redirect('/');
+            return navigate('/');
         }
 
         submitAuth();
