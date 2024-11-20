@@ -53,11 +53,11 @@ export default function Login()
             <TopNav></TopNav>
             <form>
                 <div className="mb-3">
-                    <label for="txtEmailId" className="form-label">Email</label>
+                    <label htmlFor="txtEmailId" className="form-label">Email</label>
                     <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
                 </div>
                 <div class="mb-3">
-                    <label for="txtPassword" className="form-label" required>Password</label>
+                    <label htmlFor="txtPassword" className="form-label" required>Password</label>
                     <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
                 </div>
                 <button type="button" className="btn btn-primary" onClick={validateForm}>Login</button>
