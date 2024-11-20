@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import appConfig from "../Utility/AppConfig";
 import TopNav from "./TopNav";
 import ShowRating from "./ShowRating";
+import AddComment from "./AddComment";
 
 export default function RecipeDetails()
 {
@@ -123,19 +124,29 @@ export default function RecipeDetails()
             <h2 className="text-info">
                 Reviews
             </h2>
-            <p>
+            <div>
                 <ShowRating rating={rating}></ShowRating>
-                {rating} based on {reviewCount} reviews.<br/>
-                Submit your rating.
-            </p>
+                <span className="ms-3">{rating} based on {reviewCount} reviews.</span>                
+            </div>
+            <hr/>            
+            <div>
+                <h4>Add your review</h4>
+                <AddComment></AddComment>
+            </div>
         </>;
     }
 
-    return <div>
+    return <>
         <TopNav></TopNav>
-        {recepieDetails.status === 0 && <RecipeDetailsLoading />}
-        {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
-        {recepieDetails.status === 404 && <RecipeNotFound />}
-        {recepieDetails.status === 500 && <ServerError />}
-    </div>
+        <div className="container-fluid mb-3">
+            <div className="row">
+                <div className="col-12 col-md-9">
+                    {recepieDetails.status === 0 && <RecipeDetailsLoading />}
+                    {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
+                    {recepieDetails.status === 404 && <RecipeNotFound />}
+                    {recepieDetails.status === 500 && <ServerError />}
+                </div>
+            </div>
+        </div>        
+    </>
 }
