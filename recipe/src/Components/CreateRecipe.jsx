@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import TopNav from "./TopNav";
 import appConfig from "../Utility/AppConfig";
 import { getAuthInfo } from "../Utility/AuthUtility";
 import { Link, useNavigate } from "react-router-dom";
+import getBase64 from "../Utility/FileUtility";
 
 export default function CreateRecipe()
 {
@@ -13,7 +14,8 @@ export default function CreateRecipe()
         noOfintegrands: 4,
         integrands: [],
         noOfInstructions: 6,
-        instructions: []
+        instructions: [],
+        image: undefined
     });
 
     var authInfo = getAuthInfo();
@@ -105,6 +107,24 @@ export default function CreateRecipe()
     {
         recipe.instructions[position] = e.target.value;
         updateRecipeState({...recipe, instructions: recipe.instructions});
+    }    
+
+    function recipeImageChanged(e)
+    {
+        if (e.target.files)
+        {
+            // convert image to base 64
+            getBase64(e.target.files[0], function (base64Img) {
+                debugger;
+                updateRecipeState({...recipe, image: base64Img});
+            }, 
+            function (e) {
+                console.warn(e);
+            });
+        }
+        else{
+            updateRecipeState({...recipe, image: undefined});
+        }        
     }
 
     return <>
@@ -116,7 +136,11 @@ export default function CreateRecipe()
             <div className="mb-3">
                 <label htmlFor="txtRecipeName" className="form-label">Name</label>
                 <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
-            </div>            
+            </div>  
+            <div className="mb-3">
+                <label htmlFor="recipeImage" className="form-label">Image</label>
+                <input type="file" accept="image/*" className="form-control" id="recipeImage" onChange={recipeImageChanged} required />
+            </div>          
             <div className="mb-3">
                 <label className="form-label">Integrends</label>
                 <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
