@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import appConfig from "../Utility/AppConfig";
 import TopNav from "./TopNav";
+import ShowRating from "./ShowRating";
 
 export default function RecipeDetails()
 {
@@ -99,6 +100,9 @@ export default function RecipeDetails()
         return <>
             <h1 className="text-primary">{name}</h1>
             <hr/>
+            <div>
+                <img src={image}></img>
+            </div>
             <h4 className="text-info">
                 Integrends
             </h4>
@@ -115,13 +119,12 @@ export default function RecipeDetails()
                     return <li>{instruction}</li>
                 })}
             </ol>
-            <div>
-                <img src={image}></img>
-            </div>
-            <h4 className="text-info">
-                Rating
-            </h4>
+            
+            <h2 className="text-info">
+                Reviews
+            </h2>
             <p>
+                <ShowRating rating={rating}></ShowRating>
                 {rating} based on {reviewCount} reviews.<br/>
                 Submit your rating.
             </p>
