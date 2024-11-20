@@ -131,7 +131,7 @@ export default function RecipeDetails()
             <hr/>            
             <div>
                 <h4>Add your review</h4>
-                <AddComment></AddComment>
+                <AddComment recipeId={id}></AddComment>
             </div>
         </>;
     }

@@ -1,15 +1,17 @@
 import { useState } from "react";
 
-export default function AddRating({ratingChanged})
+export default function AddRating({onChange})
 {
+    const [rating, updateRating] = useState(0);
+
     function updateStars(selectedRating)
     {
         updateRating(selectedRating);
-    }
-
-    debugger;
-
-    const [rating, updateRating] = useState(0);
+        if (onChange)
+        {
+            onChange(selectedRating);
+        }
+    }    
 
     const fullStars = Math.floor(rating);
     const emptyStars = Math.floor(5 - rating);
