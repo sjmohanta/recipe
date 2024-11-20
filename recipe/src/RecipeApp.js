@@ -19,7 +19,10 @@ export default function RecipeApp() {
             <Route path='/Recipe/Create' element={<CreateRecipe/>} /> 
             <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
         </Routes>
-        </BrowserRouter>         
+        </BrowserRouter>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" 
+        integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     </div>
   );
 }
