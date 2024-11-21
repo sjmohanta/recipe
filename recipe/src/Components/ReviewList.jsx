@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ShowRating from "./ShowRating";
 import appConfig from "../Utility/AppConfig";
+import formatDate from "../Utility/TimeUtility";
 
 export default function ReviewList({recipeId})
 {
@@ -53,7 +54,7 @@ export default function ReviewList({recipeId})
                             <p>{review.review}</p>
                         </blockquote>
                         <figcaption className="blockquote-footer">
-                            {review.authorName} on <cite title="Source Title">{review.createdOn}</cite>
+                            {review.authorName} on <cite title="Source Title">{formatDate(review.createdOn)}</cite>
                         </figcaption>
                     </figure>
             </div>;
