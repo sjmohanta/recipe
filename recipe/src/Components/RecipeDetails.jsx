@@ -95,7 +95,7 @@ export default function RecipeDetails()
         </div>;
     }    
 
-    function ShowRecipe({id, name, integrands, instructions, prepTimeMinutes, cookTimeMinutes, cuisine, tags, image, rating, reviewCount, mealType})
+    function ShowRecipe({id, name, integrands, instructions, image, rating, reviewCount, mealType})
     {
         document.title = `${name} Recipe`;
 
@@ -132,12 +132,10 @@ export default function RecipeDetails()
             <hr/>
             <div>
                 <ReviewList recipeId={id}></ReviewList>
-            </div>
-            
-                        
+            </div>      
             <div>
                 <h4>Add your review</h4>
-                <AddComment recipeId={id}></AddComment>
+                <AddComment recipeId={id} aggregatedRating={rating} reviewCount={reviewCount}></AddComment>
             </div>            
         </>;
     }

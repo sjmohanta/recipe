@@ -35,7 +35,7 @@ export default function LatestRecepies({message})
     }, []);
 
     var recipeCards = latestRecepieData.recepies.map(function (recipe) {
-        return <RecipeCard {...recipe}></RecipeCard>;
+        return <RecipeCard key={recipe.id} {...recipe}></RecipeCard>;
     });
 
     return <div>
