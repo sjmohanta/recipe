@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddRating({onChange})
+export default function RatingInput({onChange})
 {
     const [rating, updateRating] = useState(0);
 
