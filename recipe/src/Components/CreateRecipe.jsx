@@ -36,7 +36,6 @@ export default function CreateRecipe()
     function validateForm()
     {
         // To-do : Validate
-        debugger;
         const apiRootUrl = appConfig("ApiRootPath");
         const {noOfintegrands, noOfInstructions, ...dataToPost} = {...recipe, userId: authInfo.uid};
 
@@ -129,39 +128,39 @@ export default function CreateRecipe()
 
     return <>
         <TopNav></TopNav>
-        <h1 className="text-primary">
-            Create Recipe
-        </h1>
-        <form className="col-8">
-            <div className="mb-3">
-                <label htmlFor="txtRecipeName" className="form-label">Name</label>
-                <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
-            </div>  
-            <div className="mb-3">
-                <label htmlFor="recipeImage" className="form-label">Image</label>
-                <input type="file" accept="image/*" className="form-control" id="recipeImage" onChange={recipeImageChanged} required />
-            </div>          
-            <div className="mb-3">
-                <label className="form-label">Integrends</label>
-                <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
-                <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfIntegrands}>-</span>
-                {
-                    [...Array(recipe.noOfintegrands).keys()].map(key => <input onChange={(e) => integrandChanged(e, key)} key={`txtIntegrend${key + 1}`} className="form-control mb-1" 
-                        placeholder={`Integrend ${key + 1}`} required />)
-                }
-            </div>
-            <div className="mb-3">
-                <label className="form-label" required>Instructions</label>
-                <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfSteps}>+</span>
-                <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfSteps}>-</span>
-                {
-                    [...Array(recipe.noOfInstructions).keys()].map(key => <input onChange={(e) => instructionChanged(e, key)} key={`txtStep${key + 1}`} className="form-control mb-1" 
-                        placeholder={`Instruction ${key + 1}`} required />)
-                }
-            </div>
-            <button type="button" className="btn btn-primary" onClick={validateForm}>Create</button>
-        </form>
-    </>;
-
-    
+        <div className="container-fluid">
+            <h1 className="text-primary">
+                Create Recipe
+            </h1>
+            <form className="col-8">
+                <div className="mb-3">
+                    <label htmlFor="txtRecipeName" className="form-label">Name</label>
+                    <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
+                </div>  
+                <div className="mb-3">
+                    <label htmlFor="recipeImage" className="form-label">Image</label>
+                    <input type="file" accept="image/*" className="form-control" id="recipeImage" onChange={recipeImageChanged} required />
+                </div>          
+                <div className="mb-3">
+                    <label className="form-label">Integrends</label>
+                    <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
+                    <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfIntegrands}>-</span>
+                    {
+                        [...Array(recipe.noOfintegrands).keys()].map(key => <input onChange={(e) => integrandChanged(e, key)} key={`txtIntegrend${key + 1}`} className="form-control mb-1" 
+                            placeholder={`Integrend ${key + 1}`} required />)
+                    }
+                </div>
+                <div className="mb-3">
+                    <label className="form-label" required>Instructions</label>
+                    <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfSteps}>+</span>
+                    <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfSteps}>-</span>
+                    {
+                        [...Array(recipe.noOfInstructions).keys()].map(key => <input onChange={(e) => instructionChanged(e, key)} key={`txtStep${key + 1}`} className="form-control mb-1" 
+                            placeholder={`Instruction ${key + 1}`} required />)
+                    }
+                </div>
+                <button type="button" className="btn btn-primary" onClick={validateForm}>Create</button>
+            </form>
+        </div>        
+    </>;    
 }

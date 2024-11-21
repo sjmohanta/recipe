@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ShowRating from "./ShowRating";
 
 function RecipeCard({id, name, image, cuisine, rating, reviewCount})
 {
@@ -13,6 +14,7 @@ function RecipeCard({id, name, image, cuisine, rating, reviewCount})
                     <div className="card-body">
                     </div>
                     <div className="card-footer">
+                        <ShowRating rating={rating}></ShowRating>
                         <span className="badge text-bg-warning">{rating} / 5</span> ({reviewCount} votes)
                     </div>
                 </div>

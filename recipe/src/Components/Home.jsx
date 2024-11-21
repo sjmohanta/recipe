@@ -5,6 +5,8 @@ export default function Home()
 {
     return <>
         <TopNav></TopNav>
-        <LatestRecepies message="Please wait a while recipeies are being loaded."></LatestRecepies>
+        <div className="container-fluid">
+            <LatestRecepies message="Please wait a while recipeies are being loaded."></LatestRecepies>
+        </div>        
     </>;
 }

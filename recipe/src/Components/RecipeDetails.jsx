@@ -101,8 +101,8 @@ export default function RecipeDetails()
         return <>
             <h1 className="text-primary">{name}</h1>
             <hr/>
-            <div>
-                <img src={image}></img>
+            <div className="col-12 col-md-4">
+                <img src={image} class="img-thumbnail" alt="Recipe photo" />
             </div>
             <h4 className="text-info">
                 Integrends
