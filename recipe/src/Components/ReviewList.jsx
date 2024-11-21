@@ -64,7 +64,7 @@ export default function ReviewList({recipeId})
         {reviews.status === 0 && <p>
             Loading Reviews...
             </p>}
-        {reviews.status === 200 && reviews.result.map(review => <Review review={review}></Review>)}
+        {reviews.status === 200 && reviews.result.map(review => <Review key={review.id} review={review}></Review>)}
         {reviews.status === 500 && <p>Something went wrong while getting reviews</p>}
     </>;
 }

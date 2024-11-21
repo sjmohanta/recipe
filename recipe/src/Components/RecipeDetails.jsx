@@ -103,14 +103,14 @@ export default function RecipeDetails()
             <h1 className="text-primary">{name}</h1>
             <hr/>
             <div className="col-12 col-md-4">
-                <img src={image} class="img-thumbnail" alt="Recipe photo" />
+                <img src={image} className="img-thumbnail" alt="Recipe photo" />
             </div>
             <h4 className="text-info">
                 Integrends
             </h4>
             <ul>
                 {integrands.map((ingredient) => {
-                    return <li>{ingredient}</li>
+                    return <li key={ingredient}>{ingredient}</li>
                 })}
             </ul>
             <h4 className="text-info">
@@ -118,7 +118,7 @@ export default function RecipeDetails()
             </h4>
             <ol>
                 {instructions.map((instruction) => {
-                    return <li>{instruction}</li>
+                    return <li key={instruction}>{instruction}</li>
                 })}
             </ol>
             
