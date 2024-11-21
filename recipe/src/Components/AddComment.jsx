@@ -10,7 +10,8 @@ export default function AddComment({recipeId})
 
     const [review, updateComment] = useState({
         rating: undefined,
-        comment: undefined,
+        title: undefined,
+        review: undefined,
         recipeId: recipeId
     });
 
@@ -21,15 +22,20 @@ export default function AddComment({recipeId})
         updateComment({...review, rating: ratingInput});
     }
 
-    function commentChanged(e)
+    function reviewChanged(e)
     {
-        updateComment({...review, comment: e.target.value});
+        updateComment({...review, review: e.target.value});
+    }
+
+    function titleChanged(e)
+    {
+        updateComment({...review, title: e.target.value});
     }
 
     function submitComment()
     {
         const apiRootUrl = appConfig("ApiRootPath");
-        const dataToPost = {...review, userId: authInfo.uid};
+        const dataToPost = {...review, userId: authInfo.uid, authorName: authInfo.name, createdOn: new Date()};
 
         fetch(`${apiRootUrl}/reviews`, {
             method: 'POST',
@@ -53,12 +59,16 @@ export default function AddComment({recipeId})
 
     return <form>
                 <div className="mb-3">
-                    <label className="form-label">Rating</label><br></br>
+                    <label className="form-label">Your rating</label><br></br>
                     <AddRating onChange={ratingChanged}></AddRating>
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Comment</label>
-                    <textarea rows={4} className="form-control" placeholder="Commnet" onChange={commentChanged}></textarea>
+                    <label className="form-label">Title Of Review</label>
+                    <input className="form-control" placeholder="Title" onChange={titleChanged} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Review</label>
+                    <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
                 </div>
                 <button onClick={submitComment} className="btn btn-primary">Submit Review</button>
     </form>;

@@ -5,6 +5,7 @@ import appConfig from "../Utility/AppConfig";
 import TopNav from "./TopNav";
 import ShowRating from "./ShowRating";
 import AddComment from "./AddComment";
+import ReviewList from "./ReviewList";
 
 export default function RecipeDetails()
 {
@@ -128,11 +129,16 @@ export default function RecipeDetails()
                 <ShowRating rating={rating}></ShowRating>
                 <span className="ms-3">{rating} based on {reviewCount} reviews.</span>                
             </div>
-            <hr/>            
+            <hr/>
+            <div>
+                <ReviewList recipeId={id}></ReviewList>
+            </div>
+            
+                        
             <div>
                 <h4>Add your review</h4>
                 <AddComment recipeId={id}></AddComment>
-            </div>
+            </div>            
         </>;
     }
 
