@@ -6,6 +6,7 @@ import TopNav from "./TopNav";
 import ShowRating from "./ShowRating";
 import AddComment from "./AddComment";
 import ReviewList from "./ReviewList";
+import { ServerError } from "./ServerError";
 
 export default function RecipeDetails()
 {
@@ -57,25 +58,7 @@ export default function RecipeDetails()
             Please wait...
             An awesome recipe is loading.
         </p>
-    }
-
-    function ServerError()
-    {
-        return <div>
-            <h4 className="text-danger">
-                Unknown server error 
-            </h4>
-            <p>
-                Looks like there is a server error.<br />
-                Please let us know if the error persists.
-            </p>
-            <div>
-                <Link className="btn btn-info" to="/Contact">
-                    Contact Us
-                </Link>
-            </div>
-        </div>;
-    }
+    }    
 
     function RecipeNotFound()
     {
@@ -110,7 +93,11 @@ export default function RecipeDetails()
             </h4>
             <ul>
                 {integrands.map((ingredient) => {
-                    return <li key={ingredient}>{ingredient}</li>
+                    return <li key={ingredient}>
+                        <Link to={`/Recipe/Integrand?integrand=${ingredient}`}>
+                        {ingredient}
+                        </Link>                        
+                    </li>
                 })}
             </ul>
             <h4 className="text-info">

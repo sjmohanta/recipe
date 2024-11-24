@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ShowRating from "./ShowRating";
 import appConfig from "../Utility/AppConfig";
 import formatDate from "../Utility/TimeUtility";
+import { ServerError } from "./ServerError";
 
 export default function ReviewList({recipeId})
 {
@@ -65,6 +66,6 @@ export default function ReviewList({recipeId})
             Loading Reviews...
             </p>}
         {reviews.status === 200 && reviews.result.map(review => <Review key={review.id} review={review}></Review>)}
-        {reviews.status === 500 && <p>Something went wrong while getting reviews</p>}
+        {reviews.status === 500 && <ServerError />}
     </>;
 }

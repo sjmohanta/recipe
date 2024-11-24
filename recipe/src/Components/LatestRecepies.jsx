@@ -1,6 +1,7 @@
 import appConfig from "../Utility/AppConfig";
 import { useState, useEffect } from "react";
 import  RecipeCard from "./RecipeCard"; 
+import { ServerError } from "./ServerError";
 
 export default function LatestRecepies({message})
 {
@@ -46,7 +47,7 @@ export default function LatestRecepies({message})
             {latestRecepieData.status == 200 && !latestRecepieData.recepies.length && <p className="text-warning">
             No receipies were found. Be the first to add a recipe</p>}
             {latestRecepieData.status == 200 && latestRecepieData.recepies.length && recipeCards}
-            {latestRecepieData.status == 500 && <p className="text-danger">Something went wrong while getting recipies. Please check again later.</p>}
+            {latestRecepieData.status == 500 && <ServerError />}
         </div>        
     </div>
 }
