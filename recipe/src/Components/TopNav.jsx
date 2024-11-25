@@ -19,7 +19,7 @@ export default function TopNav()
                 </ul>;
     }
 
-    return <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    return <nav id="topNav" className="navbar navbar-expand-lg bg-dark">
     <div className="container-fluid">
         <Link className="navbar-brand" to="/">Recipe Book</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="recipeNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@ export default function TopNav()
         <div className="collapse navbar-collapse" id="recipeNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/Recipes">Recipies</Link>
+                    <Link className="nav-link active" aria-current="page" to="/Recipes">Recipes</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/Recipe/Create">Add</Link>

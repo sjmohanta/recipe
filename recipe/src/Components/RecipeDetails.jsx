@@ -98,7 +98,7 @@ export default function RecipeDetails()
                 {integrands.map((ingredient) => {
                     return <li key={ingredient}>
                         <Link to={`/Recipes/Integrand?integrand=${ingredient}`}>
-                        {ingredient}
+                            {ingredient}
                         </Link>                        
                     </li>
                 })}

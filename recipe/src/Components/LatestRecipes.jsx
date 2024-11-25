@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import  RecipeCard from "./RecipeCard"; 
 import { ServerError } from "./ServerError";
 
-export default function LatestRecepies({message})
+export default function LatestRecipes({message})
 {
     const [latestRecepieData, setLatestRecepis] = useState({
         status: 0,
@@ -39,15 +39,14 @@ export default function LatestRecepies({message})
         return <RecipeCard key={recipe.id} {...recipe}></RecipeCard>;
     });
 
-    return <div>
-        <h2 className="text-info">Latest Recepies</h2>
-        <hr></hr>
-        <div className="row">
-            {latestRecepieData.status == 0 && <p>{latestRecepieData.message}</p>}
-            {latestRecepieData.status == 200 && !latestRecepieData.recepies.length && <p className="text-warning">
-            No receipies were found. Be the first to add a recipe</p>}
-            {latestRecepieData.status == 200 && latestRecepieData.recepies.length && recipeCards}
-            {latestRecepieData.status == 500 && <ServerError />}
-        </div>        
-    </div>
+    return <div className="bg-secondary p-2">
+                <h2 className="text-light">Recepies</h2>        
+                <div className="row">
+                    {latestRecepieData.status == 0 && <p>{latestRecepieData.message}</p>}
+                    {latestRecepieData.status == 200 && !latestRecepieData.recepies.length && <p className="text-warning">
+                    No receipies were found. Be the first to add a recipe</p>}
+                    {latestRecepieData.status == 200 && latestRecepieData.recepies.length && recipeCards}
+                    {latestRecepieData.status == 500 && <ServerError />}
+                </div>        
+            </div>;
 }

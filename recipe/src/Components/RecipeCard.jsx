@@ -1,21 +1,27 @@
 import { Link } from "react-router-dom";
 import ShowRating from "./ShowRating";
 
-function RecipeCard({id, name, image, cuisine, rating, reviewCount})
+function RecipeCard({id, name, image, prepTimeMinutes, rating, reviewCount})
 {
-    return <div key={id} className="col-md-4 col-sm-6">
+    return <div key={id} className="col-md-2 col-sm-6">
                 <div className="card">
-                    <h5 className="card-header text-primary">
-                        <Link to={`/Recipe/${id}`}>
-                            {name}
+                    <div className="card-o-text">
+                        <Link to={`/Recipes/Rating?rating=${rating}`}>
+                            <span title={`${rating.toFixed(1)} of 5 (${reviewCount} votes)`}><ShowRating rating={rating}></ShowRating></span> 
                         </Link>
-                    </h5>
-                    <img className="card-img-top" src={image} alt="Cover image"></img>                    
-                    <div className="card-body">
+                        <Link to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>
+                            <span className="float-end text-primary-emphasis"><i className="fa fa-clock"></i> {prepTimeMinutes} min</span>
+                        </Link>                        
                     </div>
-                    <div className="card-footer">
-                        <ShowRating rating={rating}></ShowRating>
-                        <span className="badge text-bg-warning">{rating} / 5</span> ({reviewCount} votes)
+                    <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipe/${id}`}>
+                        <img className="card-img-top" src={image} alt="Cover image" />
+                    </Link>                    
+                    <div className="card-footer bg-dark">
+                        <h5 className="h6 m-0">
+                            <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipe/${id}`}>
+                                {name}
+                            </Link>
+                        </h5>                        
                     </div>
                 </div>
         </div>;
