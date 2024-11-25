@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import appConfig from "../Utility/AppConfig";
 import TopNav from "./TopNav";
 import ShowRating from "./ShowRating";
-import AddComment from "./AddComment";
+import AddReview from "./AddReview";
 import ReviewList from "./ReviewList";
 import { ServerError } from "./ServerError";
 
@@ -117,16 +117,20 @@ export default function RecipeDetails()
             </h2>
             <div>
                 <ShowRating rating={rating}></ShowRating>
-                <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating}</Link> based on {reviewCount} reviews.</span>                
+                <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating.toFixed(1)}</Link> based on {reviewCount} reviews.</span>                
             </div>
-            <hr/>
-            <div>
-                <ReviewList recipeId={id}></ReviewList>
-            </div>      
-            <div>
-                <h4>Add your review</h4>
-                <AddComment recipeId={id} aggregatedRating={rating} reviewCount={reviewCount}></AddComment>
-            </div>            
+            <hr/>               
+            <div className="row">
+                <div className="col-12 col-md-6">
+                    <ReviewList recipeId={id}></ReviewList>
+                </div>
+                <div className="col-12 col-md-6">
+                    <div className="border-start border-2 border-info-subtle p-2">
+                        <h4 className="text-secondary">Add your review</h4>
+                        <AddReview recipeId={id} aggregatedRating={rating} reviewCount={reviewCount}></AddReview>
+                    </div>
+                </div>
+            </div>     
         </>;
     }
 
@@ -134,7 +138,7 @@ export default function RecipeDetails()
         <TopNav></TopNav>
         <div className="container-fluid mb-3">
             <div className="row">
-                <div className="col-12 col-md-9">
+                <div className="col-12">
                     {recepieDetails.status === 0 && <RecipeDetailsLoading />}
                     {recepieDetails.status === 200 && <ShowRecipe {...recepieDetails.info} />}
                     {recepieDetails.status === 404 && <RecipeNotFound />}
