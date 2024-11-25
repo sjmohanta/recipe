@@ -1,0 +1,132 @@
+import RatingInput from "./RatingInput";
+import { useState } from "react";
+import { getAuthInfo } from "../Utility/AuthUtility";
+import { useNavigate } from "react-router-dom";
+import appConfig from "../Utility/AppConfig";
+
+export default function AddReview({recipeId, aggregatedRating, reviewCount})
+{
+    const navigate = useNavigate();
+
+    const [review, updateComment] = useState({
+        rating: undefined,
+        title: undefined,
+        review: undefined,
+        recipeId: recipeId
+    });
+
+    const [reviewValidationState, updateReviewValidationState] = useState({
+        isTitleEmpty: false,
+        isRatingEmpty: false,
+        isReviewEmpty: false,
+    });
+
+    const authInfo = getAuthInfo();
+    const apiRootUrl = appConfig("ApiRootPath");
+
+    function ratingChanged(ratingInput)
+    {
+        reviewValidationState.isRatingEmpty = false;
+        updateReviewValidationState({...reviewValidationState});
+
+        updateComment({...review, rating: ratingInput});
+    }
+
+    function reviewChanged(e)
+    {
+        const reviewBody = e.target.value;
+        reviewValidationState.isReviewEmpty = (reviewBody.length === 0); 
+        updateReviewValidationState({...reviewValidationState});
+
+        updateComment({...review, review: reviewBody});
+    }
+
+    function titleChanged(e)
+    {
+        const reviewTitle = e.target.value;
+        reviewValidationState.isTitleEmpty = (reviewTitle.length === 0);
+        updateReviewValidationState({...reviewValidationState});
+
+        updateComment({...review, title: reviewTitle});
+    }
+
+    function isReviewValid()
+    {
+        reviewValidationState.isTitleEmpty = (review.title === undefined || review.title.length === 0);
+        reviewValidationState.isRatingEmpty = (review.rating === undefined || review.rating === 0);
+        reviewValidationState.isReviewEmpty = (review.review === undefined || review.review.length === 0);    
+
+        updateReviewValidationState({...reviewValidationState});
+
+        return reviewValidationState.isTitleEmpty || reviewValidationState.isRatingEmpty || reviewValidationState.isReviewEmpty;
+    }
+
+    function submitComment()
+    {
+        if (isReviewValid())
+        {
+            return;
+        }
+
+        const dataToPost = {...review, userId: authInfo.uid, authorName: authInfo.name, createdOn: new Date()};
+
+        fetch(`${apiRootUrl}/reviews`, {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({...dataToPost})
+        })
+        .then(function (response) {
+            if(response.ok){
+                response.json().then(function (result) {                    
+                    navigate(`/Recipe/${recipeId}`);
+                });
+            }
+        });
+
+        function updateAggregatedRating(recipeId, aggregatedRating, reviewCount, newRating)
+        {
+            const dataToPatch = {};
+            dataToPatch.rating = ((aggregatedRating * reviewCount) + newRating) / (++reviewCount);
+            dataToPatch.reviewCount = reviewCount;
+
+            async function updateRecipeDetails() {
+                fetch(`${apiRootUrl}/recipes/${recipeId}`, {
+                    method: 'PATCH',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({...dataToPatch})
+                });
+            }
+
+            updateRecipeDetails();
+        }
+
+        updateAggregatedRating(review.recipeId, aggregatedRating, reviewCount, review.rating);
+    }
+
+    return <form>                
+                <div className="mb-3">
+                    <label className="form-label">Title Of Review <span className="text-danger">*</span></label>
+                    <input className="form-control" placeholder="Title" onChange={titleChanged} />
+                    {reviewValidationState.isTitleEmpty && <div class="invalid-feedback">
+                        Please provide your review title.
+                    </div>}
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Your rating <span className="text-danger">*</span></label><br></br>
+                    <div className="h5">
+                        <RatingInput onChange={ratingChanged}></RatingInput>
+                    </div>
+                    {reviewValidationState.isRatingEmpty && <div class="invalid-feedback">
+                        Please provide your rating.
+                    </div>}
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Review <span className="text-danger">*</span></label>
+                    <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
+                    {reviewValidationState.isReviewEmpty && <div class="invalid-feedback">
+                        Please provide your review details.
+                    </div>}
+                </div>
+                <button type="button" onClick={submitComment} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
+    </form>;
+}
