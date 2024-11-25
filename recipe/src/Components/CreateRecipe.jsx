@@ -11,6 +11,7 @@ export default function CreateRecipe()
 
     const [recipe, updateRecipeState] = useState({
         name: undefined,
+        prepTimeMinutes: undefined,
         noOfintegrands: 4,
         integrands: [],
         noOfInstructions: 6,
@@ -126,6 +127,12 @@ export default function CreateRecipe()
         }        
     }
 
+    function recipePreparationTimeChanged(e)
+    {
+        recipe.prepTimeMinutes = e.target.value;
+        updateRecipeState({...recipe});
+    }
+
     return <>
         <TopNav></TopNav>
         <div className="container-fluid">
@@ -134,15 +141,19 @@ export default function CreateRecipe()
             </h1>
             <form className="col-8">
                 <div className="mb-3">
-                    <label htmlFor="txtRecipeName" className="form-label">Name</label>
+                    <label htmlFor="txtRecipeName" className="form-label">Name <span className="text-danger">*</span></label>
                     <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
                 </div>  
                 <div className="mb-3">
-                    <label htmlFor="recipeImage" className="form-label">Image</label>
+                    <label htmlFor="txtPreparationTime" className="form-label">Preparation time (minutes) <span className="text-danger">*</span></label>
+                    <input className="form-control" id="txtPreparationTime" placeholder="Preparation time (minutes)" onChange={recipePreparationTimeChanged} required />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="recipeImage" className="form-label">Image <span className="text-danger">*</span></label>
                     <input type="file" accept="image/*" className="form-control" id="recipeImage" onChange={recipeImageChanged} required />
                 </div>          
                 <div className="mb-3">
-                    <label className="form-label">Integrends</label>
+                    <label className="form-label">Integrends <span className="text-danger">*</span></label>
                     <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfIntegrands}>+</span>
                     <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfIntegrands}>-</span>
                     {
@@ -151,7 +162,7 @@ export default function CreateRecipe()
                     }
                 </div>
                 <div className="mb-3">
-                    <label className="form-label" required>Instructions</label>
+                    <label className="form-label" required>Instructions <span className="text-danger">*</span></label>
                     <span className="btn btn-outline-secondary btn-sm ms-3 me-1" onClick={increaseNoOfSteps}>+</span>
                     <span className="btn btn-outline-secondary btn-sm" onClick={decreaseNoOfSteps}>-</span>
                     {
