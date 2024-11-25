@@ -5,9 +5,13 @@ import './App.css';
 import RecipeDetails from './Components/RecipeDetails';
 import Home from './Components/Home';
 import Login from './Components/Auth/Login';
+import Logout from './Components/Auth/Logout';
 import Register from './Components/Auth/Register';
 import CreateRecipe from './Components/CreateRecipe';
 import RecipesByIntegrand from './Components/RecipesByIntegrand';
+import RecipesByPreparationTime from './Components/RecipesByPrepationTime';
+import RecipesByRating from './Components/RecipesByRating';
+import RecipeList from './Components/RecipeList';
 
 export default function RecipeApp() {
   return (
@@ -17,8 +21,12 @@ export default function RecipeApp() {
             <Route path='/' element={<Home/>} />
             <Route path='/Login' element={<Login/>} />
             <Route path='/Register' element={<Register/>} />
+            <Route path='/Logout' element={<Logout/>} />
             <Route path='/Recipe/Create' element={<CreateRecipe/>} /> 
-            <Route path='/Recipe/Integrand' element={<RecipesByIntegrand/>} />
+            <Route path='/Recipes' element={<RecipeList/>} />
+            <Route path='/Recipes/Integrand' element={<RecipesByIntegrand/>} />
+            <Route path='/Recipes/PreparationTime' element={<RecipesByPreparationTime/>} />
+            <Route path='/Recipes/Rating' element={<RecipesByRating/>} />
             <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
         </Routes>
         </BrowserRouter>
