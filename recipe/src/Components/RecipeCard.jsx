@@ -7,7 +7,7 @@ function RecipeCard({id, name, image, prepTimeMinutes, rating, reviewCount})
                 <div className="card">
                     <div className="card-o-text">
                         <Link to={`/Recipes/Rating?rating=${rating}`}>
-                            <span title={`${rating.toFixed(1)} of 5 (${reviewCount} votes)`}><ShowRating rating={rating}></ShowRating></span> 
+                            <span title={`${rating?.toFixed(1)} of 5 (${reviewCount} votes)`}><ShowRating rating={rating}></ShowRating></span> 
                         </Link>
                         <Link to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>
                             <span className="float-end text-primary-emphasis"><i className="fa fa-clock"></i> {prepTimeMinutes} min</span>

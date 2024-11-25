@@ -117,7 +117,7 @@ export default function RecipeDetails()
             </h2>
             <div>
                 <ShowRating rating={rating}></ShowRating>
-                <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating.toFixed(1)}</Link> based on {reviewCount} reviews.</span>                
+                <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating?.toFixed(1)}</Link> based on {reviewCount} reviews.</span>                
             </div>
             <hr/>               
             <div className="row">
