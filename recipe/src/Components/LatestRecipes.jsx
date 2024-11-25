@@ -39,7 +39,7 @@ export default function LatestRecipes({message})
         return <RecipeCard key={recipe.id} {...recipe}></RecipeCard>;
     });
 
-    return <div className="bg-secondary p-2">
+    return <div className="m-2">
                 <h2 className="text-light">Recepies</h2>        
                 <div className="row">
                     {latestRecepieData.status == 0 && <p>{latestRecepieData.message}</p>}
