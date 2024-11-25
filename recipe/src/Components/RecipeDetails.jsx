@@ -78,7 +78,7 @@ export default function RecipeDetails()
         </div>;
     }    
 
-    function ShowRecipe({id, name, integrands, instructions, image, rating, reviewCount, mealType})
+    function ShowRecipe({id, name, integrands, instructions, image, rating, reviewCount, prepTimeMinutes})
     {
         document.title = `${name} Recipe`;
 
@@ -89,12 +89,15 @@ export default function RecipeDetails()
                 <img src={image} className="img-thumbnail" alt="Recipe photo" />
             </div>
             <h4 className="text-info">
+                Preparation time: <Link to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>{prepTimeMinutes} minutes</Link>
+            </h4>
+            <h4 className="text-info">
                 Integrends
             </h4>
             <ul>
                 {integrands.map((ingredient) => {
                     return <li key={ingredient}>
-                        <Link to={`/Recipe/Integrand?integrand=${ingredient}`}>
+                        <Link to={`/Recipes/Integrand?integrand=${ingredient}`}>
                         {ingredient}
                         </Link>                        
                     </li>
@@ -114,7 +117,7 @@ export default function RecipeDetails()
             </h2>
             <div>
                 <ShowRating rating={rating}></ShowRating>
-                <span className="ms-3">{rating} based on {reviewCount} reviews.</span>                
+                <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating}</Link> based on {reviewCount} reviews.</span>                
             </div>
             <hr/>
             <div>
