@@ -83,6 +83,6 @@ export default function AddComment({recipeId, aggregatedRating, reviewCount})
                     <label className="form-label">Review</label>
                     <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
                 </div>
-                <button type="button" onClick={submitComment} className="btn btn-primary">Submit Review</button>
+                <button type="button" onClick={submitComment} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
     </form>;
 }
