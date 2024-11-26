@@ -55,6 +55,8 @@ export default function CreateRecipe()
 
         dataToPost.integrands = dataToPost.integrands.filter(inte => inte && inte.length);
         dataToPost.instructions = dataToPost.instructions.filter(inst => inst && inst.length);
+        dataToPost.rating = 0;
+        dataToPost.reviewCount = 0;
 
         fetch(`${apiRootUrl}/recipes`, {
             method: 'POST',
