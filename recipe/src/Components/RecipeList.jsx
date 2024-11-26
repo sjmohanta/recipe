@@ -56,9 +56,9 @@ export default function RecipeList()
     return <>
         <TopNav></TopNav>
         <div className="continer-fluid">
-            <h3>
+            <h2 className="text-success">
                 List of all recipies
-            </h3>
+            </h2>
             {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
             {recipeState.status === 200 && recipeState.recepies.length && <div className="row">{recipeCards}</div>}
             {recipeState.status === 200 && !recipeState.recepies.length && <p>

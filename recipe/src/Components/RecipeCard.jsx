@@ -10,7 +10,7 @@ function RecipeCard({id, name, image, prepTimeMinutes, rating, reviewCount})
                             <span title={`${rating?.toFixed(1)} of 5 (${reviewCount} votes)`}><ShowRating rating={rating}></ShowRating></span> 
                         </Link>
                         <Link to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>
-                            <span className="float-end text-primary-emphasis"><i className="fa fa-clock"></i> {prepTimeMinutes} min</span>
+                            <span className="float-end text-success"><i className="fa fa-clock"></i> {prepTimeMinutes} min</span>
                         </Link>                        
                     </div>
                     <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipe/${id}`}>

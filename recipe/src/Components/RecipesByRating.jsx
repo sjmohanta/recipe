@@ -60,15 +60,15 @@ export default function RecipesByRating()
     return <>
         <TopNav></TopNav>
         <div className="continer-fluid">
-            <p>
+            <h2 className="text-info">
                 Search results for recipes with rating of <strong>{seachedRating}</strong> stars.
-            </p>
+            </h2>
             {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
-            {recipeState.status === 200 && recipeState.recepies.length && <div className="row">{recipeCards}</div>}
-            {recipeState.status === 200 && !recipeState.recepies.length && <p>
+            {(recipeState.status === 200 && recipeState.recepies.length > 0) && <div className="row">{recipeCards}</div>}
+            {(recipeState.status === 200 && recipeState.recepies.length === 0) && <p className="text-warning bg-dark p-2">
                 Looks like we don't have any recipes with <strong>{seachedRating}</strong> rating right now.<br/><br/>
-                Do you wants to add a new recipe?<br/><br/>
-                <Link to="/recipe/create" className="btn btn-outline-primary">Create Recipe</Link>
+                Do you wants to add a new recipe?<br/>
+                <Link to="/recipe/create" className="btn btn-sm btn-outline-success">Create Recipe</Link>
             </p>}
             {recipeState.status === 500 && <ServerError/>}
         </div>        
