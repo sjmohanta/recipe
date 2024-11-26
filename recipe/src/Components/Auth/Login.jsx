@@ -6,6 +6,8 @@ import {saveAuthToken} from "../../Utility/AuthUtility";
 
 export default function Login()
 {
+    document.title = "Login";
+
     const navigate = useNavigate();
     const [formState, updateFormState] = useState({
         isFormSubmitted: false,
@@ -19,9 +21,22 @@ export default function Login()
     var refEmailId = useRef();
     var refPassword = useRef();
 
+    function isFormValid()
+    {
+        formState.isEmailIdValid = refEmailId.current.value.length === 0 ? false : true;
+        formState.isPasswordValid = refPassword.current.value.length === 0 ? false : true;
+        updateFormState({...formState});
+
+        return formState.isEmailIdValid && formState.isPasswordValid;
+    }
+
     function validateForm()
     {
-        debugger;
+        if (!isFormValid())
+        {
+            return;
+        }
+
         var authData = {email: refEmailId.current.value, password: refPassword.current.value};
 
         var authApiUrl = appConfig('AuthApiUrl');
@@ -51,20 +66,34 @@ export default function Login()
 
     return <>
             <TopNav></TopNav>
-            <form>
-                <div className="mb-3">
-                    <label htmlFor="txtEmailId" className="form-label">Email</label>
-                    <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
-                </div>
-                <div class="mb-3">
-                    <label htmlFor="txtPassword" className="form-label" required>Password</label>
-                    <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
-                </div>
-                <button type="button" className="btn btn-primary" onClick={validateForm}>Login</button>
-        </form>
-        <p>
-            Don't have an account. Sign up Today.<br />
-            <Link className="btn btn-secondary" to="/Register">Sign Up</Link>
-        </p>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-12 col-md-6">
+                        <h2 className="text-primary">Log In</h2>
+                        <hr/>
+                        <form>
+                            <div className="mb-3">
+                                <label htmlFor="txtEmailId" className="form-label">Email</label>
+                                <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
+                                {formState.isEmailIdValid === false && <div class="invalid-feedback">
+                                        Please provide your registered email id
+                                    </div>}
+                            </div>
+                            <div class="mb-3">
+                                <label htmlFor="txtPassword" className="form-label" required>Password</label>
+                                <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
+                                {formState.isPasswordValid === false && <div class="invalid-feedback">
+                                        Please provide your password for login
+                                    </div>}
+                            </div>
+                            <button type="button" className="btn btn-primary" onClick={validateForm}>Login</button>
+                        </form>
+                        <p className="mt-3">
+                            Don't have an account. Sign up Today.<br />
+                            <Link className="btn btn-secondary" to="/Register">Sign Up</Link>
+                        </p>
+                    </div>
+                </div>                
+        </div>            
     </>;
 }
