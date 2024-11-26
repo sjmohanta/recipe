@@ -83,14 +83,15 @@ export default function RecipeDetails()
         document.title = `${name} Recipe`;
 
         return <>
-            <h1 className="text-primary">{name}</h1>
+            <h2 className="text-info">{name}</h2>
+            <span>
+                <i className="fa fa-clock"></i> Preparation time: 
+                 <Link className="ms-2" to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>{prepTimeMinutes} minutes</Link>
+            </span>
             <hr/>
             <div className="col-12 col-md-4">
                 <img src={image} className="img-thumbnail" alt="Recipe photo" />
-            </div>
-            <h4 className="text-info">
-                Preparation time: <Link to={`/Recipes/PreparationTime?preparationTime=${prepTimeMinutes}`}>{prepTimeMinutes} minutes</Link>
-            </h4>
+            </div>            
             <h4 className="text-info">
                 Integrends
             </h4>
