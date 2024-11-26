@@ -9,6 +9,7 @@ export default function RecipesByRating()
 {
     const [searchParams] = useSearchParams();
     const seachedRating = searchParams.get('rating');
+    document.title = `Search result for recipes with rating of ${seachedRating} stars`;
 
     const [recipeState, updateRecipeState] = useState({
         status: undefined,

@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import TopNav from "./TopNav";
 import { useState, useEffect } from "react";
 import appConfig from "../Utility/AppConfig";
@@ -9,6 +9,7 @@ export default function RecipesByPreparationTime()
 {
     const [searchParams] = useSearchParams();
     const seachedPreparationTime = searchParams.get('preparationTime');
+    document.title = `Search result for recipes with preparation time: ${seachedPreparationTime} minutes`;
 
     const [recipeState, updateRecipeState] = useState({
         status: undefined,
@@ -67,7 +68,7 @@ export default function RecipesByPreparationTime()
             {recipeState.status === 200 && !recipeState.recepies.length && <p>
                 Looks like we don't have any recipes having preparation time of <strong>{seachedPreparationTime}</strong> minutes.<br/><br/>
                 Do you wants to add a new recipe?<br/><br/>
-                <link to="/recipe/create" className="btn btn-outline-primary">Create Recipe</link>
+                <Link to="/recipe/create" className="btn btn-outline-primary">Create Recipe</Link>
             </p>}
             {recipeState.status === 500 && <ServerError/>}
         </div>        
