@@ -1,5 +1,4 @@
 import { useState } from "react";
-import TopNav from "./TopNav";
 import appConfig from "../Utility/AppConfig";
 import { getAuthInfo } from "../Utility/AuthUtility";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,14 +30,13 @@ export default function CreateRecipe()
     if (!authInfo)
     {
         return <>
-        <TopNav></TopNav>
-        <h4 className="text-danger">Unauthorized Request</h4>
-        <p>
-            You are not authorized to view this page, please login to proceed.<br/><br/>
-            <Link to="/login" className="btn btn-primary">
-                Login
-            </Link>
-        </p>
+            <h4 className="text-danger">Unauthorized Request</h4>
+            <p>
+                You are not authorized to view this page, please login to proceed.<br/><br/>
+                <Link to="/login" className="btn btn-primary">
+                    Login
+                </Link>
+            </p>
         </>;
     }    
 
@@ -168,7 +166,6 @@ export default function CreateRecipe()
     }
 
     return <>
-        <TopNav></TopNav>
         <div className="container-fluid">
             <h1 className="text-primary">
                 Create Recipe

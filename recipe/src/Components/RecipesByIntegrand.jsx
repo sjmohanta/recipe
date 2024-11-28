@@ -1,5 +1,4 @@
 import { useSearchParams, Link } from "react-router-dom";
-import TopNav from "./TopNav";
 import { useState, useEffect } from "react";
 import appConfig from "../Utility/AppConfig";
 import { ServerError } from "./ServerError";
@@ -61,7 +60,6 @@ export default function RecipesByIntegrand()
     });
 
     return <>
-        <TopNav></TopNav>
         <div className="continer-fluid">
             <p>
                 Search results for recipes having integrand <strong>{seachedIntegrand}</strong>

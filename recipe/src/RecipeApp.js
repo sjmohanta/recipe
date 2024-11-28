@@ -12,12 +12,14 @@ import RecipesByIntegrand from './Components/RecipesByIntegrand';
 import RecipesByPreparationTime from './Components/RecipesByPrepationTime';
 import RecipesByRating from './Components/RecipesByRating';
 import RecipeList from './Components/RecipeList';
+import TopNav from './Components/TopNav'; 
 
 export default function RecipeApp() {
   return (
     <div className="App">
-        <BrowserRouter>
-            <Routes>
+      <BrowserRouter>
+        <TopNav></TopNav>
+          <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/Login' element={<Login/>} />
             <Route path='/Register' element={<Register/>} />
@@ -29,8 +31,8 @@ export default function RecipeApp() {
             <Route path='/Recipes/Rating' element={<RecipesByRating/>} />
             <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
         </Routes>
-        </BrowserRouter>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" 
+      </BrowserRouter>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" 
         integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" 
         crossOrigin="anonymous" referrerPolicy="no-referrer" />
     </div>

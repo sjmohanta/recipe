@@ -1,5 +1,4 @@
 import { Link, useSearchParams } from "react-router-dom";
-import TopNav from "./TopNav";
 import { useState, useEffect } from "react";
 import appConfig from "../Utility/AppConfig";
 import { ServerError } from "./ServerError";
@@ -58,7 +57,6 @@ export default function RecipesByRating()
     });
 
     return <>
-        <TopNav></TopNav>
         <div className="continer-fluid">
             <h2 className="text-info">
                 Search results for recipes with rating of <strong>{seachedRating}</strong> stars.

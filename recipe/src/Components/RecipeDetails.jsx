@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import appConfig from "../Utility/AppConfig";
-import TopNav from "./TopNav";
 import ShowRating from "./ShowRating";
 import AddReview from "./AddReview";
 import ReviewList from "./ReviewList";
@@ -136,7 +135,6 @@ export default function RecipeDetails()
     }
 
     return <>
-        <TopNav></TopNav>
         <div className="container-fluid mb-3">
             <div className="row">
                 <div className="col-12">

@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import TopNav from "../TopNav";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { saveAuthToken } from "../../Utility/AuthUtility";
@@ -73,7 +72,6 @@ export default function Register()
     }
 
     return <>
-            <TopNav></TopNav>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-md-6">

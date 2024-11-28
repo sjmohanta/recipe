@@ -1,10 +1,8 @@
 import LatestRecipes from "./LatestRecipes";
-import TopNav from "./TopNav";
 
 export default function Home()
 {
     return <>
-        <TopNav />
         <div className="container-fluid">
             <div className="row bg-secondary">
                 <div className="col-12">

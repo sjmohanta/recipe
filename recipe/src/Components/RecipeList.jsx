@@ -1,5 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
-import TopNav from "./TopNav";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import appConfig from "../Utility/AppConfig";
 import { ServerError } from "./ServerError";
@@ -54,7 +53,6 @@ export default function RecipeList()
     });
 
     return <>
-        <TopNav></TopNav>
         <div className="continer-fluid">
             <h2 className="text-success">
                 List of all recipies
