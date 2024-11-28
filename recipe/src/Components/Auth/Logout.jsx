@@ -1,16 +1,12 @@
-import { clearAuthToken } from "../../Utility/AuthUtility";
 import { Link } from "react-router-dom";
-import { getAuthInfo } from "../../Utility/AuthUtility";
 import { useContext } from "react";
 import { AuthContext } from '../../Store/Auth-Context';
 
 export default function Logout()
 {
-    const { updateAuth } = useContext(AuthContext);
-    debugger;
-
-    clearAuthToken();
-    updateAuth(undefined);
+    const { clearAuth } = useContext(AuthContext);
+    
+    clearAuth();
 
     return <>
         <div className="container-fluid">

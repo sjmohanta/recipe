@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -13,16 +12,13 @@ import RecipesByIntegrand from './Components/RecipesByIntegrand';
 import RecipesByPreparationTime from './Components/RecipesByPrepationTime';
 import RecipesByRating from './Components/RecipesByRating';
 import RecipeList from './Components/RecipeList';
-import TopNav from './Components/TopNav'; 
-import { getAuthInfo } from './Utility/AuthUtility';
-import { AuthContext } from './Store/Auth-Context';
+import TopNav from './Components/TopNav';
+import AuthContextProvider from './Store/Auth-Context';
 
-export default function RecipeApp() {  
-  const [authInfoState, updateAuthInfoState] = useState(getAuthInfo());
-
+export default function RecipeApp() {
   return (
       <div className="App">
-        <AuthContext.Provider value={{auth: authInfoState, updateAuth: updateAuthInfoState }}>
+        <AuthContextProvider>
           <BrowserRouter>
             <TopNav></TopNav>
             <Routes>
@@ -38,7 +34,7 @@ export default function RecipeApp() {
               <Route path='/Recipe/:id' element={<RecipeDetails/>} />         
             </Routes>
           </BrowserRouter>
-        </AuthContext.Provider>        
+        </AuthContextProvider>        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" 
           integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" 
           crossOrigin="anonymous" referrerPolicy="no-referrer" />

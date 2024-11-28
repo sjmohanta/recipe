@@ -5,7 +5,6 @@ import { useContext } from "react";
 export default function TopNav()
 {
     const { auth } = useContext(AuthContext);
-    debugger;
 
     function AuthNav()
     {

@@ -1,7 +1,6 @@
 import { useRef, useState, useContext } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
-import {getAuthInfo, saveAuthToken} from "../../Utility/AuthUtility";
 import { AuthContext } from '../../Store/Auth-Context';
 
 export default function Login()
@@ -21,7 +20,7 @@ export default function Login()
     var refEmailId = useRef();
     var refPassword = useRef();
 
-    const { updateAuth } = useContext(AuthContext);
+    const { saveAuth } = useContext(AuthContext);
 
     function isFormValid()
     {
@@ -58,8 +57,7 @@ export default function Login()
             }
 
             var result = await response.json();
-            saveAuthToken(result);
-            updateAuth(getAuthInfo());
+            saveAuth(result);
 
             return navigate('/');
         }
