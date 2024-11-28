@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useContext, useState } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { saveAuthToken, getAuthInfo } from "../../Utility/AuthUtility";
+import { AuthContext } from '../../Store/Auth-Context';
 
-export default function Register({updateAuthState})
+export default function Register()
 {
     document.title = "Register";
 
@@ -21,6 +22,9 @@ export default function Register({updateAuthState})
     var refName = useRef();
     var refEmailId = useRef();
     var refPassword = useRef();
+
+    const { updateAuth } = useContext(AuthContext);
+
 
     function isFormValid()
     {
@@ -64,7 +68,8 @@ export default function Register({updateAuthState})
 
             var result = await response.json();
             saveAuthToken(result);
-            updateAuthState(getAuthInfo());
+
+            updateAuth(getAuthInfo());
 
             return navigate('/');
         }

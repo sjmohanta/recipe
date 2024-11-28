@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from '../Store/Auth-Context';
+import { useContext } from "react";
 
-export default function TopNav({authInfo})
+export default function TopNav()
 {
-    function AuthNav({authInfo})
+    const { auth } = useContext(AuthContext);
+    debugger;
+
+    function AuthNav()
     {
         return <ul className="nav justify-content-end">
-                    {authInfo && <li className="nav-item">
-                        <Link className="nav-link">Hello, {authInfo.name}</Link>
+                    {auth && <li className="nav-item">
+                        <Link className="nav-link">Hello, {auth.name}</Link>
                     </li>}
-                    {authInfo && <li className="nav-item">
+                    {auth && <li className="nav-item">
                         <Link className="nav-link" to="/Logout">Logout</Link>
                     </li>}
-                    {!authInfo && <li className="nav-item">
+                    {!auth && <li className="nav-item">
                         <Link className="nav-link" to="/Login">Login</Link>
                     </li>}
                 </ul>;
@@ -32,7 +37,7 @@ export default function TopNav({authInfo})
                                 <Link className="nav-link" to="/Recipe/Create">Add</Link>
                             </li>                
                         </ul>
-                        <AuthNav authInfo={authInfo}></AuthNav>
+                        <AuthNav></AuthNav>
                     </div>
                 </div>
             </nav>;
