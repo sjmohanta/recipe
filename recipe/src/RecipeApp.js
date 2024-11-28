@@ -13,17 +13,21 @@ import RecipesByPreparationTime from './Components/RecipesByPrepationTime';
 import RecipesByRating from './Components/RecipesByRating';
 import RecipeList from './Components/RecipeList';
 import TopNav from './Components/TopNav'; 
+import { getAuthInfo } from './Utility/AuthUtility';
+import { useState } from 'react';
 
-export default function RecipeApp() {
+export default function RecipeApp() {  
+  const [authInfoState, updateAuthInfoState] = useState(getAuthInfo());
+
   return (
     <div className="App">
       <BrowserRouter>
-        <TopNav></TopNav>
+        <TopNav authInfo={authInfoState}></TopNav>
           <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/Login' element={<Login/>} />
-            <Route path='/Register' element={<Register/>} />
-            <Route path='/Logout' element={<Logout/>} />
+            <Route path='/Login' element={<Login updateAuthState={updateAuthInfoState} />} />
+            <Route path='/Register' element={<Register updateAuthState={updateAuthInfoState}/>} />
+            <Route path='/Logout' element={<Logout updateAuthState={updateAuthInfoState}/>} />
             <Route path='/Recipe/Create' element={<CreateRecipe/>} /> 
             <Route path='/Recipes' element={<RecipeList/>} />
             <Route path='/Recipes/Integrand' element={<RecipesByIntegrand/>} />

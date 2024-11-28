@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
-import {saveAuthToken} from "../../Utility/AuthUtility";
+import {getAuthInfo, saveAuthToken} from "../../Utility/AuthUtility";
 
-export default function Login()
+export default function Login({updateAuthState})
 {
     document.title = "Login";
 
@@ -56,6 +56,7 @@ export default function Login()
 
             var result = await response.json();
             saveAuthToken(result);
+            updateAuthState(getAuthInfo());
 
             return navigate('/');
         }

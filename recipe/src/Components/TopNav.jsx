@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import { getAuthInfo } from "../Utility/AuthUtility"; 
 
-export default function TopNav()
+export default function TopNav({authInfo})
 {
-    function AuthNav()
+    function AuthNav({authInfo})
     {
-        const authInfo = getAuthInfo();
         return <ul className="nav justify-content-end">
                     {authInfo && <li className="nav-item">
                         <Link className="nav-link">Hello, {authInfo.name}</Link>
@@ -34,7 +32,7 @@ export default function TopNav()
                                 <Link className="nav-link" to="/Recipe/Create">Add</Link>
                             </li>                
                         </ul>
-                        <AuthNav></AuthNav>
+                        <AuthNav authInfo={authInfo}></AuthNav>
                     </div>
                 </div>
             </nav>;

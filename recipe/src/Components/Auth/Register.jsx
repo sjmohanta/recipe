@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
-import { saveAuthToken } from "../../Utility/AuthUtility";
+import { saveAuthToken, getAuthInfo } from "../../Utility/AuthUtility";
 
-export default function Register()
+export default function Register({updateAuthState})
 {
     document.title = "Register";
 
@@ -64,6 +64,7 @@ export default function Register()
 
             var result = await response.json();
             saveAuthToken(result);
+            updateAuthState(getAuthInfo());
 
             return navigate('/');
         }
