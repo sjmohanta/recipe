@@ -4,9 +4,12 @@ import { AuthContext } from '../../Store/Auth-Context';
 
 export default function Logout()
 {
-    const { clearAuth } = useContext(AuthContext);
-    
-    clearAuth();
+    const { auth, clearAuth } = useContext(AuthContext);
+
+    if (auth)
+    {
+        clearAuth();
+    }    
 
     return <>
         <div className="container-fluid">
