@@ -1,7 +1,7 @@
-import appConfig from "../Utility/AppConfig";
+import appConfig from "../../Utility/AppConfig";
 import { useState, useEffect } from "react";
 import  RecipeCard from "./RecipeCard"; 
-import { ServerError } from "./ServerError";
+import { ServerError } from "../Helper/ServerError";
 
 export default function LatestRecipes({message})
 {

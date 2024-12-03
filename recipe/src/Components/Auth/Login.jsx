@@ -82,7 +82,7 @@ export default function Login()
                             <div class="mb-3">
                                 <label htmlFor="txtPassword" className="form-label" required>Password</label>
                                 <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
-                                {formState.isPasswordValid === false && <div class="invalid-feedback">
+                                {formState.isPasswordValid === false && <div className="invalid-feedback">
                                         Please provide your password for login
                                     </div>}
                             </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import appConfig from "../Utility/AppConfig";
-import { getAuthInfo } from "../Utility/AuthUtility";
+import appConfig from "../../Utility/AppConfig";
+import { getAuthInfo } from "../../Utility/AuthUtility";
 import { Link, useNavigate } from "react-router-dom";
-import getBase64 from "../Utility/FileUtility";
+import getBase64 from "../../Utility/FileUtility";
 
 export default function CreateRecipe()
 {

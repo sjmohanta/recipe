@@ -1,4 +1,4 @@
-import LatestRecipes from "./LatestRecipes";
+import LatestRecipes from './Recipe/LatestRecipes';
 
 export default function Home()
 {

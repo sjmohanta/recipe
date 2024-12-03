@@ -1,14 +1,14 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import appConfig from "../Utility/AppConfig";
-import { ServerError } from "./ServerError";
-import RecipeCard from "./RecipeCard";
+import appConfig from "../../../Utility/AppConfig";
+import { ServerError } from "../../Helper/ServerError";
+import RecipeCard from "../RecipeCard";
 
-export default function RecipesByPreparationTime()
+export default function RecipesByRating()
 {
     const [searchParams] = useSearchParams();
-    const seachedPreparationTime = searchParams.get('preparationTime');
-    document.title = `Search result for recipes with preparation time: ${seachedPreparationTime} minutes`;
+    const seachedRating = searchParams.get('rating');
+    document.title = `Search result for recipes with rating of ${seachedRating} stars`;
 
     const [recipeState, updateRecipeState] = useState({
         status: undefined,
@@ -18,7 +18,7 @@ export default function RecipesByPreparationTime()
     useEffect(() => {
         async function getRecipies() {
             const apiRootUrl = appConfig("ApiRootPath");
-            var response = await fetch(`${apiRootUrl}/recipes?prepTimeMinutes=${seachedPreparationTime}`);
+            var response = await fetch(`${apiRootUrl}/recipes?rating=${seachedRating}`);
 
             try
             {
@@ -58,15 +58,15 @@ export default function RecipesByPreparationTime()
 
     return <>
         <div className="continer-fluid">
-            <p>
-                Search results for recipes with preparation time of <strong>{seachedPreparationTime}</strong> minutes.
-            </p>
+            <h2 className="text-info">
+                Search results for recipes with rating of <strong>{seachedRating}</strong> stars.
+            </h2>
             {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
-            {recipeState.status === 200 && recipeState.recepies.length && <div className="row">{recipeCards}</div>}
-            {recipeState.status === 200 && !recipeState.recepies.length && <p>
-                Looks like we don't have any recipes having preparation time of <strong>{seachedPreparationTime}</strong> minutes.<br/><br/>
-                Do you wants to add a new recipe?<br/><br/>
-                <Link to="/recipe/create" className="btn btn-outline-primary">Create Recipe</Link>
+            {(recipeState.status === 200 && recipeState.recepies.length > 0) && <div className="row">{recipeCards}</div>}
+            {(recipeState.status === 200 && recipeState.recepies.length === 0) && <p className="text-warning bg-dark p-2">
+                Looks like we don't have any recipes with <strong>{seachedRating}</strong> rating right now.<br/><br/>
+                Do you wants to add a new recipe?<br/>
+                <Link to="/recipe/create" className="btn btn-sm btn-outline-success">Create Recipe</Link>
             </p>}
             {recipeState.status === 500 && <ServerError/>}
         </div>        

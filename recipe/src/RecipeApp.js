@@ -2,18 +2,19 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.css';
-import RecipeDetails from './Components/RecipeDetails';
+
+import TopNav from './Components/Helper/TopNav';
+import AuthContextProvider from './Store/Auth-Context';
+import RecipeDetails from './Components/Recipe/RecipeDetails';
+import CreateRecipe from './Components/Recipe/CreateRecipe';
+import RecipesByIntegrand from './Components/Recipe/Search/RecipesByIntegrand';
+import RecipesByPreparationTime from './Components/Recipe/Search/RecipesByPrepationTime';
+import RecipesByRating from './Components/Recipe/Search/RecipesByRating';
+import RecipeList from './Components/Recipe/RecipeList';
 import Home from './Components/Home';
 import Login from './Components/Auth/Login';
 import Logout from './Components/Auth/Logout';
 import Register from './Components/Auth/Register';
-import CreateRecipe from './Components/CreateRecipe';
-import RecipesByIntegrand from './Components/RecipesByIntegrand';
-import RecipesByPreparationTime from './Components/RecipesByPrepationTime';
-import RecipesByRating from './Components/RecipesByRating';
-import RecipeList from './Components/RecipeList';
-import TopNav from './Components/TopNav';
-import AuthContextProvider from './Store/Auth-Context';
 
 export default function RecipeApp() {
   return (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AuthContext } from '../Store/Auth-Context';
+import { AuthContext } from '../../Store/Auth-Context';
 import { useContext } from "react";
 
 export default function TopNav()

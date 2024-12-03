@@ -46,7 +46,7 @@ export default function Register()
             name: refName.current.value,
             email: refEmailId.current.value, 
             password: refPassword.current.value
-        };        
+        };
 
         var authApiUrl = appConfig('AuthApiUrl');
 

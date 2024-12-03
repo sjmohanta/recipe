@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import appConfig from "../Utility/AppConfig";
-import ShowRating from "./ShowRating";
+import appConfig from "../../Utility/AppConfig";
+import ShowRating from "../Helper/ShowRating";
 import AddReview from "./AddReview";
 import ReviewList from "./ReviewList";
-import { ServerError } from "./ServerError";
+import { ServerError } from "../Helper/ServerError";
 
 export default function RecipeDetails()
 {

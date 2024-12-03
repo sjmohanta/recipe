@@ -1,15 +1,11 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import appConfig from "../Utility/AppConfig";
-import { ServerError } from "./ServerError";
+import appConfig from "../../Utility/AppConfig";
+import { ServerError } from "../Helper/ServerError";
 import RecipeCard from "./RecipeCard";
 
-export default function RecipesByRating()
+export default function RecipeList()
 {
-    const [searchParams] = useSearchParams();
-    const seachedRating = searchParams.get('rating');
-    document.title = `Search result for recipes with rating of ${seachedRating} stars`;
-
     const [recipeState, updateRecipeState] = useState({
         status: undefined,
         recepies: [],
@@ -18,7 +14,7 @@ export default function RecipesByRating()
     useEffect(() => {
         async function getRecipies() {
             const apiRootUrl = appConfig("ApiRootPath");
-            var response = await fetch(`${apiRootUrl}/recipes?rating=${seachedRating}`);
+            var response = await fetch(`${apiRootUrl}/recipes`);
 
             try
             {
@@ -58,15 +54,15 @@ export default function RecipesByRating()
 
     return <>
         <div className="continer-fluid">
-            <h2 className="text-info">
-                Search results for recipes with rating of <strong>{seachedRating}</strong> stars.
+            <h2 className="text-success">
+                List of all recipies
             </h2>
             {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
-            {(recipeState.status === 200 && recipeState.recepies.length > 0) && <div className="row">{recipeCards}</div>}
-            {(recipeState.status === 200 && recipeState.recepies.length === 0) && <p className="text-warning bg-dark p-2">
-                Looks like we don't have any recipes with <strong>{seachedRating}</strong> rating right now.<br/><br/>
-                Do you wants to add a new recipe?<br/>
-                <Link to="/recipe/create" className="btn btn-sm btn-outline-success">Create Recipe</Link>
+            {recipeState.status === 200 && recipeState.recepies.length && <div className="row">{recipeCards}</div>}
+            {recipeState.status === 200 && !recipeState.recepies.length && <p>
+                Looks like we don't have any recipes right now.<br/><br/>
+                Do you wants to add a new recipe?<br/><br/>
+                <Link to="/recipe/create" className="btn btn-outline-primary">Create Recipe</Link>
             </p>}
             {recipeState.status === 500 && <ServerError/>}
         </div>        

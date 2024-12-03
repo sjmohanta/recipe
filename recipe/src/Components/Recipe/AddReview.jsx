@@ -1,8 +1,8 @@
-import RatingInput from "./RatingInput";
+import RatingInput from "../Helper/RatingInput";
 import { useEffect, useState } from "react";
-import { getAuthInfo } from "../Utility/AuthUtility";
+import { getAuthInfo } from "../../Utility/AuthUtility";
 import { useNavigate } from "react-router-dom";
-import appConfig from "../Utility/AppConfig";
+import appConfig from "../../Utility/AppConfig";
 
 export default function AddReview({recipeId, aggregatedRating, reviewCount})
 {
