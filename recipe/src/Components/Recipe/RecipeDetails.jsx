@@ -54,7 +54,7 @@ export default function RecipeDetails()
     function RecipeDetailsLoading()
     {
         return <p>
-            Please wait...
+            Please wait...<br/>
             An awesome recipe is loading.
         </p>
     }    

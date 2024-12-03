@@ -12,27 +12,41 @@ export default function LatestRecipes({message})
     });
 
     useEffect(() => {
-        const apiRootUrl = appConfig("ApiRootPath");
-        fetch(`${apiRootUrl}/recipes`)
-        .then(function (response) {        
-            if(response.ok){
-                response.json().then(function (result) {                    
+        async function getLatestRecipes()
+        {
+            const apiRootUrl = appConfig("ApiRootPath");
+            var response = await fetch(`${apiRootUrl}/recipes`);
+
+            try
+            {
+                if (response.ok)
+                {
+                    var result = await response.json();
                     setLatestRecepis({
                         status: 200,
                         recepies: result,
                         message: null
                     });
-                });    
+                }
+                else
+                {
+                    setLatestRecepis({
+                        ...latestRecepieData,
+                        status: 500
+                    });
+                }
             }
-            else 
-            {                
+            catch(e)
+            {
                 setLatestRecepis({
-                    status: 500,
-                    recepies: [],
-                    message: null
+                    ...latestRecepieData,
+                    status: 500
                 });
+                console.warn(e);
             }
-        });
+        }
+
+        getLatestRecipes();        
     }, []);
 
     var recipeCards = latestRecepieData.recepies.map(function (recipe) {
