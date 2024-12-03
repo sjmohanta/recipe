@@ -1,4 +1,4 @@
-import RatingInput from "../Helper/RatingInput";
+import RatingInput from "../Shared/RatingInput";
 import { useEffect, useState } from "react";
 import { getAuthInfo } from "../../Utility/AuthUtility";
 import { useNavigate } from "react-router-dom";

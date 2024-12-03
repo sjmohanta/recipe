@@ -1,7 +1,7 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import appConfig from "../../../Utility/AppConfig";
-import { ServerError } from "../../Helper/ServerError";
+import { ServerError } from "../../Shared/ServerError";
 import RecipeCard from "../RecipeCard";
 
 export default function RecipesByIntegrand()

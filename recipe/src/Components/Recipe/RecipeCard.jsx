@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ShowRating from "../Helper/ShowRating";
+import ShowRating from "../Shared/ShowRating";
 
 function RecipeCard({id, name, image, prepTimeMinutes, rating, reviewCount})
 {

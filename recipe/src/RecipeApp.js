@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import './App.css';
+import './Styles/App.css';
 
-import TopNav from './Components/Helper/TopNav';
+import TopNav from './Components/Layout/TopNav';
 import AuthContextProvider from './Store/Auth-Context';
 import RecipeDetails from './Components/Recipe/RecipeDetails';
 import CreateRecipe from './Components/Recipe/CreateRecipe';

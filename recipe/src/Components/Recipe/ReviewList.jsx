@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import ShowRating from "../Helper/ShowRating";
+import ShowRating from "../Shared/ShowRating";
 import appConfig from "../../Utility/AppConfig";
 import formatDate from "../../Utility/TimeUtility";
-import { ServerError } from "../Helper/ServerError";
+import { ServerError } from "../Shared/ServerError";
 
 export default function ReviewList({recipeId})
 {
