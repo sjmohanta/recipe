@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import appConfig from "../../Utility/AppConfig";
 import ShowRating from "../Shared/ShowRating";
-import AddReview from "./AddReview";
-import ReviewList from "./ReviewList";
+import AddReview from "./Reviews/AddReview";
+import ReviewList from "./Reviews/ReviewList";
 import { ServerError } from "../Shared/ServerError";
 
 export default function RecipeDetails()

@@ -1,8 +1,8 @@
-import RatingInput from "../Shared/RatingInput";
 import { useEffect, useState } from "react";
-import { getAuthInfo } from "../../Utility/AuthUtility";
 import { useNavigate } from "react-router-dom";
-import appConfig from "../../Utility/AppConfig";
+import { getAuthInfo } from "../../../Utility/AuthUtility";
+import appConfig from "../../../Utility/AppConfig";
+import RatingInput from "../../Shared/RatingInput";
 
 export default function AddReview({recipeId, aggregatedRating, reviewCount})
 {
@@ -69,20 +69,31 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
             return;
         }
 
-        const dataToPost = {...review, userId: authInfo.uid, authorName: authInfo.name, createdOn: new Date()};
+        async function createReview() {
+            const dataToPost = {...review, userId: authInfo.uid, authorName: authInfo.name, createdOn: new Date()};
 
-        fetch(`${apiRootUrl}/reviews`, {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify({...dataToPost})
-        })
-        .then(function (response) {
-            if(response.ok){
-                response.json().then(function (result) {                    
-                    navigate(`/Recipe/${recipeId}`);
+            try
+            {
+                var response = await fetch(`${apiRootUrl}/reviews`, {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({...dataToPost})
                 });
+    
+                if(response.ok){
+                    await response.json();
+
+                    // To-do : Add comment to state, show success message 
+                    // navigate(`/Recipe/${recipeId}`);
+                }
             }
-        });
+            catch(e)
+            {
+                console.warn(e);
+            }
+        }
+
+        createReview();
 
         function updateAggregatedRating(recipeId, aggregatedRating, reviewCount, newRating)
         {
@@ -91,7 +102,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
             dataToPatch.reviewCount = reviewCount;
 
             async function updateRecipeDetails() {
-                fetch(`${apiRootUrl}/recipes/${recipeId}`, {
+                await fetch(`${apiRootUrl}/recipes/${recipeId}`, {
                     method: 'PATCH',
                     headers: {'Content-Type' : 'application/json'},
                     body: JSON.stringify({...dataToPatch})
