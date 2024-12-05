@@ -64,7 +64,7 @@ export default function RecipesByIntegrand()
             <p>
                 Search results for recipes having integrand <strong>{seachedIntegrand}</strong>
             </p>
-            {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
+            {!recipeState.status && <p><i className="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
             {recipeState.status === 200 && recipeState.recepies.length && <div className="row">{recipeCards}</div>}
             {recipeState.status === 200 && !recipeState.recepies.length && <p>
                 Looks like we don't have any recipes for integrand <strong>{seachedIntegrand}</strong>.<br/><br/>

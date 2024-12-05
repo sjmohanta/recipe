@@ -121,7 +121,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                     <div className="mb-3">
                         <label className="form-label">Title Of Review <span className="text-danger">*</span></label>
                         <input className="form-control" placeholder="Title" onChange={titleChanged} />
-                        {reviewValidationState.isTitleEmpty && <div class="invalid-feedback">
+                        {reviewValidationState.isTitleEmpty && <div className="invalid-feedback">
                             Please provide your review title.
                         </div>}
                     </div>
@@ -130,14 +130,14 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                         <div className="h5">
                             <RatingInput onChange={ratingChanged}></RatingInput>
                         </div>
-                        {reviewValidationState.isRatingEmpty && <div class="invalid-feedback">
+                        {reviewValidationState.isRatingEmpty && <div className="invalid-feedback">
                             Please provide your rating.
                         </div>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Review <span className="text-danger">*</span></label>
                         <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
-                        {reviewValidationState.isReviewEmpty && <div class="invalid-feedback">
+                        {reviewValidationState.isReviewEmpty && <div className="invalid-feedback">
                             Please provide your review details.
                         </div>}
                     </div>

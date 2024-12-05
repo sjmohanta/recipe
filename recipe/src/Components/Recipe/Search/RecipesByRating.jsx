@@ -61,7 +61,7 @@ export default function RecipesByRating()
             <h2 className="text-info">
                 Search results for recipes with rating of <strong>{seachedRating}</strong> stars.
             </h2>
-            {!recipeState.status && <p><i class="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
+            {!recipeState.status && <p><i className="fa-solid fa-spinner fa-spin"></i> Please wait while loading search results.</p>}
             {(recipeState.status === 200 && recipeState.recepies.length > 0) && <div className="row">{recipeCards}</div>}
             {(recipeState.status === 200 && recipeState.recepies.length === 0) && <p className="text-warning bg-dark p-2">
                 Looks like we don't have any recipes with <strong>{seachedRating}</strong> rating right now.<br/><br/>

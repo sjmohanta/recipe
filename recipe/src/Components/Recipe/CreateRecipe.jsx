@@ -174,21 +174,21 @@ export default function CreateRecipe()
                 <div className="mb-3">
                     <label htmlFor="txtRecipeName" className="form-label">Name <span className="text-danger">*</span></label>
                     <input className="form-control" id="txtRecipeName" placeholder="Recipe Name" onChange={recipeNameChanged} required />
-                    {recipeValidation.isNameEmpty && <div class="invalid-feedback">
+                    {recipeValidation.isNameEmpty && <div className="invalid-feedback">
                             Please provide recipe name.
                         </div>}
                 </div>  
                 <div className="mb-3">
                     <label htmlFor="txtPreparationTime" className="form-label">Preparation time (minutes) <span className="text-danger">*</span></label>
                     <input className="form-control" type="number" id="txtPreparationTime" placeholder="Preparation time (minutes)" onChange={recipePreparationTimeChanged} required />
-                    {(recipeValidation.isPrepTimeValid === false) && <div class="invalid-feedback">
+                    {(recipeValidation.isPrepTimeValid === false) && <div className="invalid-feedback">
                             Please provide recipe preparation time.
                         </div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="recipeImage" className="form-label">Image <span className="text-danger">*</span></label>
                     <input type="file" accept="image/*" className="form-control" id="recipeImage" onChange={recipeImageChanged} required />
-                    {(recipeValidation.isImageSelected === false) && <div class="invalid-feedback">
+                    {(recipeValidation.isImageSelected === false) && <div className="invalid-feedback">
                             Please select image for recipe.
                         </div>}
                 </div>          
@@ -200,7 +200,7 @@ export default function CreateRecipe()
                         [...Array(recipe.noOfintegrands).keys()].map(key => <input onChange={(e) => integrandChanged(e, key)} key={`txtIntegrend${key + 1}`} className="form-control mb-1" 
                             placeholder={`Integrend ${key + 1}`} required />)
                     }
-                    {(recipeValidation.isAnyIntegrandsInputed === false) && <div class="invalid-feedback">
+                    {(recipeValidation.isAnyIntegrandsInputed === false) && <div className="invalid-feedback">
                             Please add some integrands.
                         </div>}
                 </div>
@@ -212,7 +212,7 @@ export default function CreateRecipe()
                         [...Array(recipe.noOfInstructions).keys()].map(key => <input onChange={(e) => instructionChanged(e, key)} key={`txtStep${key + 1}`} className="form-control mb-1" 
                             placeholder={`Instruction ${key + 1}`} required />)
                     }
-                    {(recipeValidation.isAnyInstructionsInputed === false) && <div class="invalid-feedback">
+                    {(recipeValidation.isAnyInstructionsInputed === false) && <div className="invalid-feedback">
                             Please add some instructions to prepare the recipe.
                         </div>}
                 </div>

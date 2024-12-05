@@ -83,21 +83,21 @@ export default function Register()
                             <div className="mb-3">
                                     <label for="txtName" className="form-label">Name <span className="text-danger">*</span></label>
                                     <input ref={refName} className="form-control" id="txtName" required />
-                                    {formState.isNameValid === false && <div class="invalid-feedback">
+                                    {formState.isNameValid === false && <div className="invalid-feedback">
                                         Please provide your name
                                     </div>}
                                 </div>
-                                <div class="mb-3">
+                                <div className="mb-3">
                                     <label for="txtEmailId" className="form-label">Email <span className="text-danger">*</span></label>
                                     <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
-                                    {formState.isEmailIdValid === false && <div class="invalid-feedback">
+                                    {formState.isEmailIdValid === false && <div className="invalid-feedback">
                                         Please provide your email id
                                     </div>}
                                 </div>
-                                <div class="mb-3">
+                                <div className="mb-3">
                                     <label for="txtPassword" className="form-label" required>Password <span className="text-danger">*</span></label>
                                     <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
-                                    {formState.isPasswordValid === false && <div class="invalid-feedback">
+                                    {formState.isPasswordValid === false && <div className="invalid-feedback">
                                         Please provide a password
                                     </div>}
                                 </div>

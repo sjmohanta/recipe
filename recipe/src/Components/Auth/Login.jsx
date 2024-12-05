@@ -75,11 +75,11 @@ export default function Login()
                             <div className="mb-3">
                                 <label htmlFor="txtEmailId" className="form-label">Email</label>
                                 <input ref={refEmailId} type="email" className="form-control" id="txtEmailId" required />
-                                {formState.isEmailIdValid === false && <div class="invalid-feedback">
+                                {formState.isEmailIdValid === false && <div className="invalid-feedback">
                                         Please provide your registered email id
                                     </div>}
                             </div>
-                            <div class="mb-3">
+                            <div className="mb-3">
                                 <label htmlFor="txtPassword" className="form-label" required>Password</label>
                                 <input ref={refPassword} type="password" className="form-control" id="txtPassword" />
                                 {formState.isPasswordValid === false && <div className="invalid-feedback">
