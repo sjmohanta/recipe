@@ -5,10 +5,14 @@ import reportWebVitals from './reportWebVitals';
 import { RecipeRouter } from './Routes/RecipeRouter';
 import { RouterProvider } from 'react-router-dom';
 
+import AuthContextProvider from './Store/Auth-Context';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={RecipeRouter} />
+    <AuthContextProvider>
+      <RouterProvider router={RecipeRouter} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
 
