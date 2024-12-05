@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from '../../Store/Auth-Context';
+import { AuthContext } from '../../Store/AuthContext';
 
 export default function Logout()
 {

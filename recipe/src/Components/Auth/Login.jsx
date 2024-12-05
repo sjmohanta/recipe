@@ -1,7 +1,7 @@
 import { useRef, useState, useContext } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from '../../Store/Auth-Context';
+import { AuthContext } from '../../Store/AuthContext';
 
 export default function Login()
 {

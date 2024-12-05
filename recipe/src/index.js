@@ -4,8 +4,7 @@ import './Styles/index.css';
 import reportWebVitals from './reportWebVitals';
 import { RecipeRouter } from './Routes/RecipeRouter';
 import { RouterProvider } from 'react-router-dom';
-
-import AuthContextProvider from './Store/Auth-Context';
+import AuthContextProvider from './Store/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
