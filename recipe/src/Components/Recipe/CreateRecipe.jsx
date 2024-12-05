@@ -6,6 +6,7 @@ import getBase64 from "../../Utility/FileUtility";
 
 export default function CreateRecipe()
 {
+    document.title = "Create Recipe";
     const navigate = useNavigate();
 
     const [recipe, updateRecipeState] = useState({

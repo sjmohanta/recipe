@@ -2,6 +2,8 @@ import LatestRecipes from './Recipe/LatestRecipes';
 
 export default function Home()
 {
+    document.title = "Recipe Book";
+
     return <>
         <div className="container-fluid">
             <div className="row bg-secondary">

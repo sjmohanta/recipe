@@ -6,7 +6,7 @@ import RecipeCard from "./RecipeCard";
 
 export default function RecipeList()
 {
-    document.Title = "Recipe List";
+    document.title = "Recipe List";
 
     const [recipeState, updateRecipeState] = useState({
         status: undefined,

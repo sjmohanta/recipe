@@ -4,6 +4,8 @@ import { AuthContext } from '../../Store/Auth-Context';
 
 export default function Logout()
 {
+    document.title = "Log out";
+
     const { auth, clearAuth } = useContext(AuthContext);
 
     if (auth)
