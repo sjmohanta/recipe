@@ -165,10 +165,11 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                         updateComment({...review, hasUserAlreadyRatedRecipe: result.length > 0});
                     } 
                 }
-                catch
+                catch(e)
                 {
                     // disable comment for error
                     updateComment({...review, hasUserAlreadyRatedRecipe: false}); 
+                    console.warn(e);
                 }                       
             }
 
