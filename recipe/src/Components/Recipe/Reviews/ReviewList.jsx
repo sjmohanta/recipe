@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ShowRating from "../../Shared/ShowRating";
 import appConfig from "../../../Utility/AppConfig";
 import formatDate from "../../../Utility/TimeUtility";
 import { ServerError } from "../../Shared/ServerError";
+import { ReviewsContext } from "../../../Store/ReviewsContext";
 
 export default function ReviewList({recipeId})
 {
-    const [reviews, updateReviews] = useState({
-        status: 0,
-        result: []
-    });
+    const { reviews, status, setReviews } = useContext(ReviewsContext);    
 
     useEffect(() => {
         async function getReviews(recipeId) {
@@ -20,26 +18,27 @@ export default function ReviewList({recipeId})
                 var response = await fetch(`${apiRootUrl}/reviews?recipeId=${recipeId}`);
                 if (!response.ok)
                 {
-                    updateReviews({
-                        ...reviews,
+                    setReviews({
+                        type: 'SET',
                         status: response.status
                     });
                 }
                 else{
                     var result = await response.json();
-                    updateReviews({
-                        status: response.status,
-                        result: result
+                    setReviews({
+                        type: 'SET',
+                        reviews: result,
+                        status: response.status
                     });
                 } 
             }
             catch
             {
-                updateReviews({
-                    ...reviews,
+                setReviews({
+                    type: 'SET',
                     status: 500
                 });
-            }                       
+            }
         }
 
         getReviews(recipeId);        
@@ -62,10 +61,10 @@ export default function ReviewList({recipeId})
     }
 
     return <>
-        {reviews.status === 0 && <p>
+        {status === 0 && <p>
             Loading Reviews...
             </p>}
-        {reviews.status === 200 && reviews.result.map(review => <Review key={review.id} review={review}></Review>)}
-        {reviews.status === 500 && <ServerError />}
+        {status === 200 && reviews.map(review => <Review key={review.id} review={review}></Review>)}
+        {status === 500 && <ServerError />}
     </>;
 }

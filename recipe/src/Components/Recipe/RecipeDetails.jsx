@@ -6,6 +6,7 @@ import ShowRating from "../Shared/ShowRating";
 import AddReview from "./Reviews/AddReview";
 import ReviewList from "./Reviews/ReviewList";
 import { ServerError } from "../Shared/ServerError";
+import ReviewContextProvider from "../../Store/ReviewsContext";
 
 export default function RecipeDetails()
 {
@@ -119,18 +120,21 @@ export default function RecipeDetails()
                 <ShowRating rating={rating}></ShowRating>
                 <span className="ms-3"><Link to={`/Recipes/Rating?rating=${rating}`}>{rating?.toFixed(1)}</Link> based on {reviewCount} reviews.</span>                
             </div>
-            <hr/>               
-            <div className="row">
-                <div className="col-12 col-md-6">
-                    <ReviewList recipeId={id}></ReviewList>
-                </div>
-                <div className="col-12 col-md-6">
-                    <div className="border-start border-2 border-info-subtle p-2">
-                        <h4 className="text-secondary">Add your review</h4>
-                        <AddReview recipeId={id} aggregatedRating={rating} reviewCount={reviewCount}></AddReview>
+            <hr/>    
+
+            <ReviewContextProvider>
+                <div className="row">
+                    <div className="col-12 col-md-6">
+                        <ReviewList recipeId={id}></ReviewList>
                     </div>
-                </div>
-            </div>     
+                    <div className="col-12 col-md-6">
+                        <div className="border-start border-2 border-info-subtle p-2">
+                            <h4 className="text-secondary">Add your review</h4>
+                            <AddReview recipeId={id} aggregatedRating={rating} reviewCount={reviewCount}></AddReview>
+                        </div>
+                    </div>
+                </div> 
+            </ReviewContextProvider>                
         </>;
     }
 
