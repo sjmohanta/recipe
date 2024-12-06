@@ -8,7 +8,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
 {
     const navigate = useNavigate();
 
-    const [review, updateReview] = useState({
+    const [review, updateReviewState] = useState({
         rating: undefined,
         title: undefined,
         review: undefined,
@@ -30,7 +30,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isRatingEmpty = false;
         updateReviewValidationState({...reviewValidationState});
 
-        updateReview({...review, rating: ratingInput});
+        updateReviewState({...review, rating: ratingInput});
     }
 
     function reviewChanged(e)
@@ -39,7 +39,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isReviewEmpty = (reviewBody.length === 0); 
         updateReviewValidationState({...reviewValidationState});
 
-        updateReview({...review, review: reviewBody});
+        updateReviewState({...review, review: reviewBody});
     }
 
     function titleChanged(e)
@@ -48,7 +48,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isTitleEmpty = (reviewTitle.length === 0);
         updateReviewValidationState({...reviewValidationState});
 
-        updateReview({...review, title: reviewTitle});
+        updateReviewState({...review, title: reviewTitle});
     }
 
     function isReviewValid()
@@ -158,17 +158,17 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                     if (!response.ok)
                     {
                         // disable review submit for error
-                        updateReview({...review, hasUserAlreadyRatedRecipe: false});
+                        updateReviewState({...review, hasUserAlreadyRatedRecipe: false});
                     }
                     else{
                         var result = await response.json();
-                        updateReview({...review, hasUserAlreadyRatedRecipe: result.length > 0});
+                        updateReviewState({...review, hasUserAlreadyRatedRecipe: result.length > 0});
                     } 
                 }
                 catch(e)
                 {
                     // disable review submit for error
-                    updateReview({...review, hasUserAlreadyRatedRecipe: false}); 
+                    updateReviewState({...review, hasUserAlreadyRatedRecipe: false}); 
                     console.warn(e);
                 }                       
             }
@@ -177,7 +177,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         }
         else{
             // disable review submit for error
-            updateReview({...review, hasUserAlreadyRatedRecipe: false});
+            updateReviewState({...review, hasUserAlreadyRatedRecipe: false});
         }
     }, []);
 
