@@ -8,7 +8,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
 {
     const navigate = useNavigate();
 
-    const [review, updateComment] = useState({
+    const [review, updateReview] = useState({
         rating: undefined,
         title: undefined,
         review: undefined,
@@ -30,7 +30,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isRatingEmpty = false;
         updateReviewValidationState({...reviewValidationState});
 
-        updateComment({...review, rating: ratingInput});
+        updateReview({...review, rating: ratingInput});
     }
 
     function reviewChanged(e)
@@ -39,7 +39,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isReviewEmpty = (reviewBody.length === 0); 
         updateReviewValidationState({...reviewValidationState});
 
-        updateComment({...review, review: reviewBody});
+        updateReview({...review, review: reviewBody});
     }
 
     function titleChanged(e)
@@ -48,7 +48,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         reviewValidationState.isTitleEmpty = (reviewTitle.length === 0);
         updateReviewValidationState({...reviewValidationState});
 
-        updateComment({...review, title: reviewTitle});
+        updateReview({...review, title: reviewTitle});
     }
 
     function isReviewValid()
@@ -62,7 +62,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         return reviewValidationState.isTitleEmpty || reviewValidationState.isRatingEmpty || reviewValidationState.isReviewEmpty;
     }
 
-    function submitComment()
+    function submitReview()
     {
         if (isReviewValid())
         {
@@ -101,7 +101,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
             dataToPatch.rating = ((aggregatedRating * reviewCount) + newRating) / (++reviewCount);
             dataToPatch.reviewCount = reviewCount;
 
-            async function updateRecipeDetails() {
+            async function updateRecipeRating() {
                 await fetch(`${apiRootUrl}/recipes/${recipeId}`, {
                     method: 'PATCH',
                     headers: {'Content-Type' : 'application/json'},
@@ -109,7 +109,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                 });
             }
 
-            updateRecipeDetails();
+            updateRecipeRating();
         }
 
         updateAggregatedRating(review.recipeId, aggregatedRating, reviewCount, review.rating);
@@ -141,7 +141,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                             Please provide your review details.
                         </div>}
                     </div>
-                    <button type="button" onClick={submitComment} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
+                    <button type="button" onClick={submitReview} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
                     {!authInfo && <span className="text-warning ms-2">You must login first to submit a review.</span>}
                 </form>;
     }
@@ -157,18 +157,18 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                     var response = await fetch(`${apiRootUrl}/reviews?recipeId=${recipeId}&userId=${authInfo.uid}`);
                     if (!response.ok)
                     {
-                        // disable comment for error
-                        updateComment({...review, hasUserAlreadyRatedRecipe: false});
+                        // disable review submit for error
+                        updateReview({...review, hasUserAlreadyRatedRecipe: false});
                     }
                     else{
                         var result = await response.json();
-                        updateComment({...review, hasUserAlreadyRatedRecipe: result.length > 0});
+                        updateReview({...review, hasUserAlreadyRatedRecipe: result.length > 0});
                     } 
                 }
                 catch(e)
                 {
-                    // disable comment for error
-                    updateComment({...review, hasUserAlreadyRatedRecipe: false}); 
+                    // disable review submit for error
+                    updateReview({...review, hasUserAlreadyRatedRecipe: false}); 
                     console.warn(e);
                 }                       
             }
@@ -176,8 +176,8 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
             getUserRatingForReview();
         }
         else{
-            // disable comment for error
-            updateComment({...review, hasUserAlreadyRatedRecipe: false});
+            // disable review submit for error
+            updateReview({...review, hasUserAlreadyRatedRecipe: false});
         }
     }, []);
 
