@@ -15,10 +15,10 @@ export default function LatestRecipes({message})
         async function getLatestRecipes()
         {
             const apiRootUrl = appConfig("ApiRootPath");
-            var response = await fetch(`${apiRootUrl}/recipes`);
 
             try
             {
+                var response = await fetch(`${apiRootUrl}/recipes`);
                 if (response.ok)
                 {
                     var result = await response.json();
