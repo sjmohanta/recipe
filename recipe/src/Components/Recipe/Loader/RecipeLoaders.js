@@ -15,3 +15,19 @@ export async function latestRecipiesLoader()
         });
     }
 }
+
+export async function recipieDetailsLoader({request, params})
+{
+    const apiRootUrl = appConfig("ApiRootPath");
+    var response = await fetch(`${apiRootUrl}/recipes/${params.id}`);
+    if (response.ok)
+    {
+        return await response.json();
+    }
+    else
+    {
+        return new Response('Error while getting recipe details', {
+            status: 500
+        });
+    }
+}

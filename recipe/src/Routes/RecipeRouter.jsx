@@ -11,7 +11,7 @@ import Login from '../Components/Auth/Login';
 import Logout from '../Components/Auth/Logout';
 import Register from '../Components/Auth/Register';
 import RootLayout from '../Components/Layout/Layout';
-import { latestRecipiesLoader } from '../Components/Recipe/Loader/RecipeLoaders';
+import { latestRecipiesLoader, recipieDetailsLoader } from '../Components/Recipe/Loader/RecipeLoaders';
 import CustomError from './CustomError';
 
 export const RecipeRouter = createBrowserRouter([
@@ -33,7 +33,7 @@ export const RecipeRouter = createBrowserRouter([
         { path: '/Recipes/Integrand', element: <RecipesByIntegrand /> },
         { path: '/Recipes/PreparationTime', element: <RecipesByPreparationTime /> },
         { path: '/Recipes/Rating', element: <RecipesByRating /> },
-        { path: '/Recipes/:id', element: <RecipeDetails /> }
+        { path: '/Recipes/:id', element: <RecipeDetails />, loader: recipieDetailsLoader }
       ]
     }
   ]);
