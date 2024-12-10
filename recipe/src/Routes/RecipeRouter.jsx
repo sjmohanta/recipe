@@ -12,11 +12,13 @@ import Logout from '../Components/Auth/Logout';
 import Register from '../Components/Auth/Register';
 import RootLayout from '../Components/Layout/Layout';
 import { latestRecipiesLoader } from '../Components/Recipe/Loader/RecipeLoaders';
+import CustomError from './CustomError';
 
 export const RecipeRouter = createBrowserRouter([
     { 
       path: '/', 
       element: <RootLayout />,
+      errorElement: <CustomError />,
       children: [
         {
           index: true,
