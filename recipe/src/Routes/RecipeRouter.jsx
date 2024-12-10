@@ -19,8 +19,7 @@ export const RecipeRouter = createBrowserRouter([
       children: [
         {
           index: true,
-          element: <Home />,
-          end: true
+          element: <Home />
         },
         { path: '/Login', element: <Login /> },
         { path: '/Register', element: <Register /> },
@@ -30,7 +29,7 @@ export const RecipeRouter = createBrowserRouter([
         { path: '/Recipes/Integrand', element: <RecipesByIntegrand /> },
         { path: '/Recipes/PreparationTime', element: <RecipesByPreparationTime /> },
         { path: '/Recipes/Rating', element: <RecipesByRating /> },
-        { path: '/Recipe/:id', element: <RecipeDetails /> }
+        { path: '/Recipes/:id', element: <RecipeDetails /> }
       ]
     }
   ]);

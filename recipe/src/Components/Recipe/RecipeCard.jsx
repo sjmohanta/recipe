@@ -13,12 +13,12 @@ function RecipeCard({id, name, image, prepTimeMinutes, rating, reviewCount})
                             <span className="float-end text-success"><i className="fa fa-clock"></i> {prepTimeMinutes} min</span>
                         </Link>                        
                     </div>
-                    <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipe/${id}`}>
+                    <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipes/${id}`}>
                         <img className="card-img-top" src={image} alt="Cover image" />
                     </Link>                    
                     <div className="card-footer bg-dark">
                         <h5 className="h6 m-0">
-                            <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipe/${id}`}>
+                            <Link title={`Show details of recipe ${name}`} className="text-decoration-none text-info" to={`/Recipes/${id}`}>
                                 {name}
                             </Link>
                         </h5>                        
