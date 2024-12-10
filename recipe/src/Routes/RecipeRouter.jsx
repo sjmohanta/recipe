@@ -18,8 +18,9 @@ export const RecipeRouter = createBrowserRouter([
       element: <RootLayout />,
       children: [
         {
-          path: '/',
-          element: <Home />
+          index: true,
+          element: <Home />,
+          end: true
         },
         { path: '/Login', element: <Login /> },
         { path: '/Register', element: <Register /> },
