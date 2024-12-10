@@ -5,13 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import { RecipeRouter } from './Routes/RecipeRouter';
 import { RouterProvider } from 'react-router-dom';
 import AuthContextProvider from './Store/AuthContext';
+import { ErrorProvider } from './Store/ErrorContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <RouterProvider router={RecipeRouter} />
-    </AuthContextProvider>
+    <ErrorProvider>
+      <AuthContextProvider>
+        <RouterProvider router={RecipeRouter} />
+      </AuthContextProvider>
+    </ErrorProvider>    
   </React.StrictMode>
 );
 
