@@ -11,6 +11,7 @@ import Login from '../Components/Auth/Login';
 import Logout from '../Components/Auth/Logout';
 import Register from '../Components/Auth/Register';
 import RootLayout from '../Components/Layout/Layout';
+import { latestRecipiesLoader } from '../Components/Recipe/Loader/RecipeLoaders';
 
 export const RecipeRouter = createBrowserRouter([
     { 
@@ -19,7 +20,8 @@ export const RecipeRouter = createBrowserRouter([
       children: [
         {
           index: true,
-          element: <Home />
+          element: <Home />,
+          loader: latestRecipiesLoader
         },
         { path: '/Login', element: <Login /> },
         { path: '/Register', element: <Register /> },
