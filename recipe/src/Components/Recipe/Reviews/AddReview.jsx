@@ -186,7 +186,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         {review.hasUserAlreadyRatedRecipe && <div>
                 <h4 className="text-warning">Rating already submitted</h4>
                 <p>
-                    You had already submitted your rating for this recipe.<br/>
+                    You have already submitted your rating for this recipe.<br/>
                     Thanks, you!! 
                 </p>
             </div>}
