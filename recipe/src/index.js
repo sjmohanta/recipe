@@ -2,19 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './Styles/index.css';
 import reportWebVitals from './reportWebVitals';
-import { RecipeRouter } from './Routes/RecipeRouter';
-import { RouterProvider } from 'react-router-dom';
-import AuthContextProvider from './Store/AuthContext';
-import { ErrorProvider } from './Store/ErrorContext';
+import RecipeApp from './RecipeApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ErrorProvider>
-      <AuthContextProvider>
-        <RouterProvider router={RecipeRouter} />
-      </AuthContextProvider>
-    </ErrorProvider>    
+    <RecipeApp/>
   </React.StrictMode>
 );
 
