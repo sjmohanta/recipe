@@ -1,8 +1,9 @@
 import appConfig from "../../../Utility/AppConfig";
 
+const apiRootUrl = appConfig("ApiRootPath");
+
 export async function latestRecipiesLoader()
 {
-    const apiRootUrl = appConfig("ApiRootPath");
     var response = await fetch(`${apiRootUrl}/recipes`);
     if (response.ok)
     {
@@ -18,8 +19,31 @@ export async function latestRecipiesLoader()
 
 export async function recipieDetailsLoader({request, params})
 {
-    const apiRootUrl = appConfig("ApiRootPath");
-    var response = await fetch(`${apiRootUrl}/recipes/${params.id}`);
+    const recipeId = params.id;
+
+    return {
+        recipeDetails: await fetchRecipeDetails(recipeId),
+        recipeReviews: fetchRecipeReviews(recipeId),
+    };
+}
+
+async function fetchRecipeReviews(recipeId) {
+    var response = await fetch(`${apiRootUrl}/reviews?recipeId=${recipeId}`);
+
+    if (response.ok)
+    {
+        return await response.json();
+    }
+    else
+    {
+        return new Response('Error while getting recipe reviews', {
+            status: 500
+        });
+    }
+}
+
+async function fetchRecipeDetails(recipeId) {
+    var response = await fetch(`${apiRootUrl}/recipes/${recipeId}`);
     if (response.ok)
     {
         return await response.json();
