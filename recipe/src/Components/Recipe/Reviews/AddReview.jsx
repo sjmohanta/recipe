@@ -129,38 +129,6 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         updateAggregatedRating(review.recipeId, aggregatedRating, reviewCount, review.rating);
     }
 
-    function ReviewForm()
-    {
-        return <form>                
-                    <div className="mb-3">
-                        <label className="form-label">Title Of Review <span className="text-danger">*</span></label>
-                        <input className="form-control" placeholder="Title" onChange={titleChanged} />
-                        {reviewValidationState.isTitleEmpty && <div className="invalid-feedback">
-                            Please provide your review title.
-                        </div>}
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Your rating <span className="text-danger">*</span></label><br></br>
-                        <div className="h5">
-                            <RatingInput onChange={ratingChanged}></RatingInput>
-                        </div>
-                        {reviewValidationState.isRatingEmpty && <div className="invalid-feedback">
-                            Please provide your rating.
-                        </div>}
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Review <span className="text-danger">*</span></label>
-                        <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
-                        {reviewValidationState.isReviewEmpty && <div className="invalid-feedback">
-                            Please provide your review details.
-                        </div>}
-                    </div>
-                    <button type="button" onClick={submitReview} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
-                    {!authInfo && <span className="text-warning ms-2">You must login first to submit a review.</span>}
-                    {reviewValidationState.isServerError && <ServerError message="Something went wrong while adding your review." />}
-                </form>;
-    }
-
     useEffect(() => {
         if (authInfo)
         {
@@ -197,7 +165,34 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
     }, []);
 
     return <>
-        {(review.hasUserAlreadyRatedRecipe === false) && <ReviewForm></ReviewForm>}
+        {(review.hasUserAlreadyRatedRecipe === false) && <form>                
+                    <div className="mb-3">
+                        <label className="form-label">Title Of Review <span className="text-danger">*</span></label>
+                        <input className="form-control" placeholder="Title" onChange={titleChanged} />
+                        {reviewValidationState.isTitleEmpty && <div className="invalid-feedback">
+                            Please provide your review title.
+                        </div>}
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Your rating <span className="text-danger">*</span></label><br></br>
+                        <div className="h5">
+                            <RatingInput onChange={ratingChanged}></RatingInput>
+                        </div>
+                        {reviewValidationState.isRatingEmpty && <div className="invalid-feedback">
+                            Please provide your rating.
+                        </div>}
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Review <span className="text-danger">*</span></label>
+                        <textarea rows={4} className="form-control" placeholder="Review" onChange={reviewChanged}></textarea>
+                        {reviewValidationState.isReviewEmpty && <div className="invalid-feedback">
+                            Please provide your review details.
+                        </div>}
+                    </div>
+                    <button type="button" onClick={submitReview} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
+                    {!authInfo && <span className="text-warning ms-2">You must login first to submit a review.</span>}
+                    {reviewValidationState.isServerError && <ServerError message="Something went wrong while adding your review." />}
+                </form>}
         {review.hasUserAlreadyRatedRecipe && <div>
                 <h4 className="text-warning">Rating already submitted</h4>
                 <p>
