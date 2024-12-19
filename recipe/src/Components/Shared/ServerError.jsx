@@ -1,10 +1,12 @@
-export function ServerError()
+export function ServerError({message})
 {
-    return <>
-        <h2 className="text-danger">Server Error!</h2>
+    const defaultErrorMessage = `There was an Unknown server error. <br/>
+            Please let us know if error persists.`;
+
+    return <div className="text-danger">
+        <h2>Server Error!</h2>
         <p>
-            There was an Unknown server error. <br/>
-            Please let us know if error persists.
+            {message ?? defaultErrorMessage}
         </p>
-    </>;
+    </div>;
 }

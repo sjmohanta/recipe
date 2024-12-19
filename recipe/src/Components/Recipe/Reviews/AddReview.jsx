@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuthInfo } from "../../../Utility/AuthUtility";
 import appConfig from "../../../Utility/AppConfig";
 import RatingInput from "../../Shared/RatingInput";
+import { ServerError } from "../../Shared/ServerError";
 
 export default function AddReview({recipeId, aggregatedRating, reviewCount})
 {
@@ -17,9 +18,10 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
     });
 
     const [reviewValidationState, updateReviewValidationState] = useState({
-        isTitleEmpty: false,
-        isRatingEmpty: false,
-        isReviewEmpty: false,
+        isTitleEmpty: undefined,
+        isRatingEmpty: undefined,
+        isReviewEmpty: undefined,
+        isServerError: undefined
     });
 
     const authInfo = getAuthInfo();
@@ -84,11 +86,15 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                     await response.json();
 
                     // To-do : Add comment to state, show success message 
-                    // navigate(`/Recipe/${recipeId}`);
+                    navigate(`/Recipe/${recipeId}`);
+                }
+                else{
+                    updateReviewValidationState({...reviewValidationState, isServerError: true});
                 }
             }
             catch(e)
             {
+                updateReviewValidationState({...reviewValidationState, isServerError: true});
                 console.warn(e);
             }
         }
@@ -99,14 +105,22 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
         {
             const dataToPatch = {};
             dataToPatch.rating = ((aggregatedRating * reviewCount) + newRating) / (++reviewCount);
-            dataToPatch.reviewCount = reviewCount;
+            dataToPatch.reviewCount = reviewCount;            
 
             async function updateRecipeRating() {
-                await fetch(`${apiRootUrl}/recipes/${recipeId}`, {
-                    method: 'PATCH',
-                    headers: {'Content-Type' : 'application/json'},
-                    body: JSON.stringify({...dataToPatch})
-                });
+                try
+                {
+                    await fetch(`${apiRootUrl}/recipes/${recipeId}`, {
+                        method: 'PATCH',
+                        headers: {'Content-Type' : 'application/json'},
+                        body: JSON.stringify({...dataToPatch})
+                    });
+                }
+                catch(e)
+                {
+                    updateReviewValidationState({...reviewValidationState, isServerError: true});
+                    console.warn(e);
+                }
             }
 
             updateRecipeRating();
@@ -143,6 +157,7 @@ export default function AddReview({recipeId, aggregatedRating, reviewCount})
                     </div>
                     <button type="button" onClick={submitReview} className="btn btn-primary" disabled={authInfo ? false : true}>Submit Review</button>
                     {!authInfo && <span className="text-warning ms-2">You must login first to submit a review.</span>}
+                    {reviewValidationState.isServerError && <ServerError message="Something went wrong while adding your review." />}
                 </form>;
     }
 
