@@ -24,7 +24,8 @@ export default function CreateRecipe()
         isPrepTimeValid: undefined,
         isAnyIntegrandsInputed: undefined,
         isAnyInstructionsInputed: undefined,
-        isImageSelected: undefined
+        isImageSelected: undefined,
+        isServerError: undefined
     });
 
     var authInfo = getAuthInfo();
@@ -57,23 +58,32 @@ export default function CreateRecipe()
         dataToPost.rating = 0;
         dataToPost.reviewCount = 0;
 
-        fetch(`${apiRootUrl}/recipes`, {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify({...dataToPost})
-        })
-        .then(function (response) { 
-            if(response.ok){
-                response.json().then(function (result) {                    
-                    debugger;
-                    navigate(`/Recipe/${result.id}`);
-                });
-            }
-            else
+        const postCreateRecipeData = async () => {
+            try
             {
-                debugger;
+                const response = await fetch(`${apiRootUrl}/recipes`, {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({...dataToPost})
+                });
+    
+                if (response.ok)
+                {
+                    var result = await response.json();
+                    navigate(`/Recipes/${result.id}`);
+                }
+                else{
+                    updateRecipeValidationState({...recipeValidation, isServerError: true});
+                }
             }
-        });
+            catch(exc)
+            {
+                console.warn(exc);
+                updateRecipeValidationState({...recipeValidation, isServerError: true});
+            }
+        };
+
+        postCreateRecipeData();
     }
 
     function increaseNoOfIntegrands()
@@ -218,6 +228,10 @@ export default function CreateRecipe()
                         </div>}
                 </div>
                 <button type="button" className="btn btn-primary" onClick={validateForm}>Create</button>
+                {recipeValidation.isServerError && <p className="text-danger">
+                    Something went wrong while creating new recipe.<br></br>
+                    Please try again after sometime.
+                    </p>}
             </form>
         </div>        
     </>;    
