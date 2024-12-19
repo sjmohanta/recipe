@@ -2,6 +2,7 @@ import { useRef, useState, useContext } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../Store/AuthContext';
+import { ServerError } from "../Shared/ServerError";
 
 export default function Login()
 {
@@ -15,6 +16,7 @@ export default function Login()
         invalidEmailIdMessage: undefined,
         isPasswordValid: undefined,
         invalidPasswordMessage: undefined,
+        isServerError: undefined
     });
 
     var refEmailId = useRef();
@@ -44,22 +46,30 @@ export default function Login()
 
         async function submitAuth()
         {
-            const response = await fetch(`${authApiUrl}/login`, {
-                method: 'POST',
-                headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify(authData)
-            });
-
-            if (!response.ok)
+            try
             {
-                // handle error
-                return;
+                const response = await fetch(`${authApiUrl}/login`, {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify(authData)
+                });
+    
+                if (!response.ok)
+                {
+                    updateFormState({...formState, isServerError: true});
+                    return;
+                }
+    
+                var result = await response.json();
+                saveAuth(result);
+    
+                return navigate('/');
             }
-
-            var result = await response.json();
-            saveAuth(result);
-
-            return navigate('/');
+            catch(e)
+            {
+                console.warn(e);
+                updateFormState({...formState, isServerError: true});
+            }
         }
 
         submitAuth();
@@ -87,6 +97,7 @@ export default function Login()
                                     </div>}
                             </div>
                             <button type="button" className="btn btn-primary" onClick={validateForm}>Login</button>
+                            {formState.isServerError && <ServerError></ServerError>}
                         </form>
                         <p className="mt-3">
                             Don't have an account. Sign up Today.<br />

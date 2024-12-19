@@ -2,6 +2,7 @@ import { useRef, useContext, useState } from "react";
 import appConfig from "../../Utility/AppConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../Store/AuthContext';
+import { ServerError } from "../Shared/ServerError";
 
 export default function Register()
 {
@@ -15,7 +16,8 @@ export default function Register()
         invalidEmailIdMessage: undefined,
         isPasswordValid: undefined,
         invalidPasswordMessage: undefined,
-        isNameValid: undefined
+        isNameValid: undefined,
+        isSeverError: undefined
     });
 
     var refName = useRef();
@@ -52,22 +54,30 @@ export default function Register()
 
         async function createUser()
         {
-            const response = await fetch(`${authApiUrl}/SignUp`, {
-                method: 'POST',
-                headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify(authData)
-            });
-
-            if (!response.ok)
+            try
             {
-                // handle error
-                return;
+                const response = await fetch(`${authApiUrl}/SignUp`, {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify(authData)
+                });
+    
+                if (!response.ok)
+                {
+                    updateFormState({...formState, isSeverError: true });
+                    return;
+                }
+    
+                var result = await response.json();
+                saveAuth(result);
+    
+                return navigate('/');
             }
-
-            var result = await response.json();
-            saveAuth(result);
-
-            return navigate('/');
+            catch(e)
+            {
+                console.warn(e);
+                updateFormState({...formState, isSeverError: true });
+            }
         }
 
         createUser();
@@ -102,6 +112,7 @@ export default function Register()
                                     </div>}
                                 </div>
                                 <button type="button" className="btn btn-primary" onClick={validateForm}>Register</button>
+                                {formState.isSeverError && <ServerError/>}
                         </form>
                         <p className="mt-3">
                             Already have an account.<br />
